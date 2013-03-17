@@ -68,7 +68,7 @@
         </Mage_Rule>
         <Mage_Adminhtml>
             <active>true</active>
-            <codePool>core</codePool>
+            <codePool>local</codePool>
             <depends>
                 <Mage_Admin/>
             </depends>
@@ -106,7 +106,7 @@
         </Mage_Customer>
         <Mage_Catalog>
             <active>true</active>
-            <codePool>core</codePool>
+            <codePool>local</codePool>
             <depends>
                 <Mage_Eav/>
                 <Mage_Dataflow/>
@@ -141,7 +141,7 @@
         </Mage_CatalogSearch>
         <Mage_Sales>
             <active>true</active>
-            <codePool>core</codePool>
+            <codePool>local</codePool>
             <depends>
                 <Mage_Rule/>
                 <Mage_Catalog/>
@@ -151,7 +151,7 @@
         </Mage_Sales>
         <Mage_SalesRule>
             <active>true</active>
-            <codePool>core</codePool>
+            <codePool>local</codePool>
             <depends>
                 <Mage_Rule/>
                 <Mage_Catalog/>
@@ -160,7 +160,7 @@
         </Mage_SalesRule>
         <Mage_Checkout>
             <active>true</active>
-            <codePool>core</codePool>
+            <codePool>local</codePool>
             <depends>
                 <Mage_Sales/>
                 <Mage_CatalogInventory/>
