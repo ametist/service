@@ -1,0 +1,79 @@
+<?php
+$codes = $this->affiliateCodeCollection;
+
+
+$affiliateId = $this->getRequest()->getParam('id');
+$key = Mage::getSingleton('adminhtml/url')->getSecretKey("adminhtml_affiliate", "deletecode");
+$editkey = Mage::getSingleton('adminhtml/url')->getSecretKey("adminhtml_partnerlocation", "edit");
+
+//generate new affiliatecode link
+$key_affiliatecode = Mage::getSingleton('adminhtml/url')->getSecretKey("adminhtml_affiliatecode", "new");
+$newAffiliateCodeLink = Mage::helper("adminhtml")->getUrl("affiliate/adminhtml_affiliatecode/new/", array("affiliate_id" => $affiliateId, "key" => $key_affiliatecode));
+?>                         
+<h2><?php echo Mage::helper('affiliate')->__('affiliate codes list:'); ?></h2>
+<table class="data" id="partnerlocations-table" cellpadding="20">
+    <tr bgcolor="#6F8992">
+	<th>
+	    ID
+	</th>
+	<th>
+	    <?php echo Mage::helper('affiliate')->__('code'); ?>
+	</th>
+	<th>
+	    <?php echo Mage::helper('affiliate')->__('description'); ?>
+	</th>
+	<th>
+	    <?php echo Mage::helper('affiliate')->__('status'); ?>
+	</th>
+	<th>
+	    <?php echo Mage::helper('affiliate')->__('created time'); ?>
+	</th>
+	<th>
+	    <?php echo Mage::helper('affiliate')->__('end time'); ?>
+	</th>
+	<th>
+	    <?php echo Mage::helper('affiliate')->__('amount add'); ?>
+	</th>
+    </tr>
+    <?php
+    foreach ($codes as $code) {
+
+	$affiliateCodeID = $code['id'];
+	$key = Mage::getSingleton('adminhtml/url')->getSecretKey("adminhtml_affiliatecode", "edit");
+	$editLink = Mage::helper("adminhtml")->getUrl("affiliate/adminhtml_affiliatecode/edit/", array("affiliate_id" => $affiliateId, "id" => $affiliateCodeID, "key" => $key));
+
+
+	echo '
+<tr>
+    <td>'
+	. $code['id'] .
+	'</td>
+    <td>'
+	. $code['code'] .
+	'</td>
+    <td>'
+	. $code['description'] .
+	'</td>
+    <td>'
+	. $code['status'] .
+	'</td>
+    <td>'
+	. $code['created_time'] .
+	'</td>
+    <td>'
+	. $code['end_time'] .
+	'</td>
+    <td>'
+	. $code['amount_add'] .
+	'</td>
+    <td> 
+    <a href="'
+	. $editLink .
+	'">' . Mage::helper('affiliate')->__('edit') . '</a>
+    </td>
+</tr>';
+    }
+    ?>
+</table>
+
+<a href="<?php echo $newAffiliateCodeLink; ?>"><?php echo Mage::helper('affiliate')->__('New Affiliate'); ?></a>

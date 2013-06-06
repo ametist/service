@@ -1,0 +1,188 @@
+<div id="userInfo">
+    <h1>Оформление заказа</h1>
+    <div id="bkgSampleContent">
+
+        <div class="cart">
+            <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>            
+            <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+                <fieldset>
+                    <table id="shopping-cart-table" class="data-table cart-table">
+                        <col width="1" />
+                        <col />
+                        <col width="1" />
+                        <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                            <col width="1" />
+                        <?php endif ?>
+                        <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                            <col width="1" />
+                        <?php endif; ?>
+                        <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                            <col width="1" />
+                        <?php endif; ?>
+                        <col width="1" />
+                        <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                            <col width="1" />
+                        <?php endif; ?>
+                        <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                            <col width="1" />
+                        <?php endif; ?>
+                        <col width="1" />
+
+                        <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+                        <thead>
+                            <tr>
+                                <th rowspan="<?php echo $mergedCells; ?>">&nbsp;</th>
+                                <th rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Product Name') ?></span></th>
+                                <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                                    <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><span class="nobr"><?php echo $this->__('Move to Wishlist') ?></span></th>
+                                <?php endif ?>
+<!--                                <th class="a-center" colspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Unit Price') ?></span></th>-->
+                                <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><?php echo $this->__('Qty') ?></th>
+                                <th class="a-center" colspan="<?php echo $mergedCells; ?>"><?php echo $this->__('Subtotal') ?></th>
+                                <th rowspan="<?php echo $mergedCells; ?>" class="a-center">&nbsp;</th>
+                            </tr>
+                            <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+                                <tr>
+                                    <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                                    <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                                    <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                                    <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                                </tr>
+                            <?php endif; ?>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <td colspan="50" class="a-right">
+                                    <?php if ($this->getContinueShoppingUrl()): ?>
+                                        <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+                                    <?php endif; ?>
+                                    <button type="submit" title="<?php echo $this->__('Update Shopping Cart') ?>" class="button btn-update"><span><span><?php echo $this->__('Update Shopping Cart') ?></span></span></button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <?php foreach ($this->getItems() as $_item): ?>
+                                <?php echo $this->getItemHtml($_item) ?>
+                            <?php endforeach ?>
+                        </tbody>
+                    </table>
+                    <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+                </fieldset>
+            </form>
+        </div>
+
+        <form id="order_form" action="<?php echo $this->getUrl('checkout/onepage/saveOrder') ?>" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="checkout_method" value="onepage"/>            
+            <h2>Персональные данные:</h2>
+            <div id="personalinfoOrder">
+                <fieldset>
+                    <ul class="form-list">
+                        <li id="billing-new-address-form">
+                            <fieldset>
+                                <ul>
+                                    <li class="fields"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getQuote()->getCustomer())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
+                                    <li class="fields">
+                                        <div class="field">
+                                            <label for="billing:email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                                            <div class="input-box">
+                                                <input type="text" name="billing[email]" id="billing:email" readonly="readonly" value="<?php echo $this->getQuote()->getCustomer()->getEmail() ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email required-entry" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="fields">
+                                        <div class="field">
+                                            <label for="billing:city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+                                            <div class="input-box">
+                                                <input type="text" title="<?php echo $this->__('City') ?>" name="billing[city]" readonly="readonly" value="<?php echo $this->getQuote()->getCustomer()->getStore()->getGroup()->getName() ?>" class="input-text required-entry" id="billing:city" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="fields">
+                                        <div class="field">
+                                            <label for="billing:telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+                                            <div class="input-box">
+                                                <input type="text" name="billing[telephone]" value="<?php print_r($this->getQuote()->getCustomer()->getData('phone')) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" id="billing:telephone" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="fields">
+                                        <div class="field">
+                                            <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
+                                            <?php echo $_gender->setGender($this->getQuote()->getCustomerGender())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </fieldset>
+                        </li>
+                    </ul>
+                </fieldset>
+                <label><input type="checkbox" class="order_check" value="1" id="accept_terms" name="accept_terms" class="required">Я согласен с <a href='{$terms_link}' target='_blank'>Условиями продажи</a> и <a href="{$privacy_link}" target="_blank">Правилами хранения персональных данных</a></label>
+                <div id="agreement_alert_message">Необходимо ознакомиться и согласиться с правилами</div>
+            </div>
+            <h2>Выберите способ оплаты:</h2><br>
+            <div id="paymenttypeselector">
+                <fieldset>
+                    <?php print $this->getChildHtml('methods') ?>
+                </fieldset>
+
+                <p class="a-right"><input type="submit" value="Submit" class="button_blue_long" /></p>
+            </div>
+            <input type="hidden" id="current_pay_type" name="payment_type" value="null">
+        </form>
+        <div id="checkout_bottom"> 
+            <img src="<?php print $this->getSkinUrl('images/qweimg.png')?>" align="left" >
+            &nbsp; Есть вопросы по оплате? Звони, мы поможем!&nbsp; 
+            <img src="<?php print $this->getSkinUrl('images/phoneimg.png')?>" style="vertical-align: middle;">
+            <div> 
+                <span style="font:15px/27px Arial; font-weight: bold;">044 5922228</span><br />
+                пн-пт (с 9 до 20)
+            </div>
+        </div>
+    </div>
+</div>
+<!-- HTTP Google Code for Buyers Remarketing List -->
+<script type="text/javascript">
+//<![CDATA[
+    alert('pepe');
+jQuery.noConflict();
+
+jQuery('#order_form input[type=submit]').value('pepe');
+jQuery(function(){
+    jQuery('input.radio').each(function(){
+        jQuery(this).hide();
+    });    
+    jQuery('li.checkout_payment_method').click(function(){
+        var attr = jQuery(this).find('input.radio').attr('selected');
+        if(typeof(attr) == "undefined"){
+            jQuery('li.checkout_payment_method').each(function(){
+                jQuery(this).css('background-color','#F1F1F1');
+                jQuery(this).find('input:radio').attr('checked', false);
+            });
+            jQuery(this).css('background-color', '#DEDBAB');
+            jQuery(this).find('input:radio').attr('checked', true);
+        }else{
+            jQuery(this).css('background-color', '#DEDBAB');
+            jQuery(this).find('input:radio').attr('checked', false);
+        }
+    });
+    
+    jQuery('#order_form input[type=submit]').trigger('click',function(event){
+        event.preventDefault();
+        if(typeof(jQuery('input.order_check').attr('checked')) != 'undefined'){
+            jQuery('#order_form').submit();
+        }else if( jQuery('#order_form input:radio:checked').length != 1){
+            alert('<?php print $this->__('Please specify payment method.')?>');
+        }else{
+            jQuery('#agreement_alert_message').show();
+        }
+    })    
+});
+//]]>    
+</script>
+<!--<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>-->
+<noscript>
+<div style="display:inline;">
+<!--    <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/978162788/?label=VFIXCLTQrAIQ5Ki20gM&amp;guid=ON&amp;script=0"/>-->
+</div>
+</noscript>

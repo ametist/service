@@ -1,0 +1,107 @@
+<div id="userInfo">
+    <div class="contentBorderTop"></div>
+    <h1><?php echo $this->__('Как получить бонусы?') ?></h1>
+
+    <div id="bkgSampleContent">
+
+        <div class="padding">
+            <h2 class="captionMiddle"><?php echo $this->__('1. Приобрести бонусы') ?></h2>
+            <br/>
+
+            <?php echo $this->__(
+            'Бонусы можно получить, пополнив ваш персональный счет по любому из доступных на сайте методов оплаты.
+	    1 грн = 1 бонус.'
+        ) ?>
+            <br/><br/>
+            <a style="text-decoration: none;"
+               href="<?php echo $this->getUrlWithoutParams() ?>bonuspay/buybonuses/index">
+                <input type="submit" border="0" class="button_blue link_white getbonus" value="Купить бонусы">
+            </a>
+            <br/><br/><br/>
+
+            <h2 class="captionMiddle"><?php echo $this->__('2. Получить бонусы за приглашение друзей') ?></h2>
+
+            <div class="margin_big">
+                <?php echo $this->__(
+                'Бонусы можно получить, приглашая на SuperDeal.com.ua друзей.&nbsp;
+		Пригласите друга, отправив ему вашу уникальную ссылку.
+		За каждого друга, который перейдет по вашей ссылке приглашения и совершит свою первую покупку на сайте,
+		вы получите 50 бонусов на счет.
+		Приглашенным другом может считаться только пользователь, не зарегистрированный ранее на сайте.
+		Как только кто-то из ваших друзей сделает первую покупку, вы получите уведомление на email, и
+		бонусы вам начислятся автоматически.'
+            ) ?>
+            </div>
+            <br/>
+
+            <div style="background:url('<?php echo $this->getSkinUrl('images/tell_top.png')?>') no-repeat;height:4px;">
+                &nbsp;</div>
+            <div
+                style="background:url('<?php echo $this->getSkinUrl('images/tell_mid.png')?>') repeat-y;padding: 10px;">
+                <h3 style="color:black;"><?php echo $this->__('Отправьте друзьям вашу уникальную ссылку') ?>:</h3>
+
+                <div style="margin:4px 0 5px 0;" class="addthis_toolbox addthis_default_style addthis_32x32_style">
+                    <p>
+                        <input type="text" value="<?php echo Mage::getUrl('landing/index/tlf', array('id' => '166', 'aff' => $this->checkCustomerAffiliateIsSet())) ?>"
+                               name="link" id="get-bonus-link" class="input_subscribe">
+                    </p>
+
+                    <h3 style="color:black;"><?php echo $this->__('Пригласите друзей из популярных соцсетей')?>:</h3>
+
+                    <p>
+                        <script charset="windows-1251" src="http://vkontakte.ru/js/api/share.js?9"
+                                type="text/javascript"></script>
+                        <script type="text/javascript">
+                            document.getElementById('vk-share').innerHTML = (VK.Share.button({url:url, title:title, description:description, image:image}, {type:'custom', text:'&lt;img border=0 src="http://vk.com/images/vk16.png" /&gt;'}))
+                        </script>
+                    </p>
+                    <div style="display:block;clear:both;padding-left:30px;">
+                        <a addthis:description="На SuperDeal есть скидки до 90% на одежду, суши, фитнес, боулинг и многое другое! Я уже пользуюсь!"
+                           addthis:title="Тебе какую скидку? Выбирай на SuperDeal скидки на все, что захочешь!"
+                           addthis:url="http://www.superdeal.com.ua/kiev/landing/index/index/id/166/aff/66-1-QWTEREK"
+                           title="Отправить в Facebook" class="addthis_button_facebook at300b" href="#"><span
+                            class="at300bs at15nc at15t_facebook"></span></a>
+                        <a addthis:description="На SuperDeal есть скидки до 90% на одежду, суши, фитнес, боулинг и многое другое! Я уже пользуюсь!"
+                           addthis:title="Тебе какую скидку? Выбирай на SuperDeal скидки на все, что захочешь!"
+                           addthis:url="http://www.superdeal.com.ua/kiev/landing/index/index/id/166/aff/66-1-QWTEREK"
+                           title="Отправить в Вконтакте" class="addthis_button_vk at300b" href="#"><span
+                            class="at300bs at15nc at15t_vk"></span></a>
+                        <a addthis:description="На SuperDeal есть скидки до 90% на одежду, суши, фитнес, боулинг и многое другое! Я уже пользуюсь!"
+                           addthis:title="Тебе какую скидку? Выбирай на SuperDeal скидки на все, что захочешь!"
+                           addthis:url="http://www.superdeal.com.ua/kiev/landing/index/index/id/166/aff/66-1-QWTEREK"
+                           title="Отправить в Одноклассники" class="addthis_button_odnoklassniki_ru at300b"
+                           href="http://www.addthis.com/bookmark.php?v=250&amp;winname=addthis&amp;pub=xa-4e0dc89547bc795b&amp;source=tbx32-250&amp;lng=ru-RU&amp;s=odnoklassniki_ru&amp;url=http%3A%2F%2Fwww.superdeal.com.ua%2Fkiev%2Fru%2Fdo%2Flanding%2Finit%2F185!66-1-QWTEREK&amp;title=%D0%A2%D0%B5%D0%B1%D0%B5%20%D0%BA%D0%B0%D0%BA%D1%83%D1%8E%20%D1%81%D0%BA%D0%B8%D0%B4%D0%BA%D1%83%3F%20%D0%92%D1%8B%D0%B1%D0%B8%D1%80%D0%B0%D0%B9%20%D0%BD%D0%B0%20SuperDeal%20%D1%81%D0%BA%D0%B8%D0%B4%D0%BA%D0%B8%20%D0%BD%D0%B0%20%D0%B2%D1%81%D0%B5%2C%20%D1%87%D1%82%D0%BE%20%D0%B7%D0%B0%D1%85%D0%BE%D1%87%D0%B5%D1%88%D1%8C!&amp;ate=AT-xa-4e0dc89547bc795b/-/-/4ee750671fd1c37c/1&amp;frommenu=1&amp;uid=4ee7506744f7a324&amp;description=%D0%9D%D0%B0%20SuperDeal%20%D0%B5%D1%81%D1%82%D1%8C%20%D1%81%D0%BA%D0%B8%D0%B4%D0%BA%D0%B8%20%D0%B4%D0%BE%2090%25%20%D0%BD%D0%B0%20%D0%BE%D0%B4%D0%B5%D0%B6%D0%B4%D1%83%2C%20%D1%81%D1%83%D1%88%D0%B8%2C%20%D1%84%D0%B8%D1%82%D0%BD%D0%B5%D1%81%2C%20%D0%B1%D0%BE%D1%83%D0%BB%D0%B8%D0%BD%D0%B3%20%D0%B8%20%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE%D0%B5%20%D0%B4%D1%80%D1%83%D0%B3%D0%BE%D0%B5!%20%D0%AF%20%D1%83%D0%B6%D0%B5%20%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D1%8E%D1%81%D1%8C!&amp;ct=1&amp;pre=http%3A%2F%2Fwww.superdeal.com.ua%2FKiev%2Fru%2Fdo%2Fdeal%2Finit%2F7938%2F&amp;tt=0"
+                           target="_blank"><span class="at300bs at15nc at15t_odnoklassniki_ru"></span></a>
+                        <a addthis:description="На SuperDeal есть скидки до 90% на одежду, суши, фитнес, боулинг и многое другое! Я уже пользуюсь!"
+                           addthis:title="Тебе какую скидку? Выбирай на SuperDeal скидки на все, что захочешь!"
+                           addthis:url="http://www.superdeal.com.ua/kiev/landing/index/index/id/166/aff/66-1-QWTEREK"
+                           title="Отправить в Мой мир" class="addthis_button_mymailru at300b"
+                           href="http://www.addthis.com/bookmark.php?v=250&amp;winname=addthis&amp;pub=xa-4e0dc89547bc795b&amp;source=tbx32-250&amp;lng=ru-RU&amp;s=mymailru&amp;url=http%3A%2F%2Fwww.superdeal.com.ua%2Fkiev%2Fru%2Fdo%2Flanding%2Finit%2F185!66-1-QWTEREK&amp;title=%D0%A2%D0%B5%D0%B1%D0%B5%20%D0%BA%D0%B0%D0%BA%D1%83%D1%8E%20%D1%81%D0%BA%D0%B8%D0%B4%D0%BA%D1%83%3F%20%D0%92%D1%8B%D0%B1%D0%B8%D1%80%D0%B0%D0%B9%20%D0%BD%D0%B0%20SuperDeal%20%D1%81%D0%BA%D0%B8%D0%B4%D0%BA%D0%B8%20%D0%BD%D0%B0%20%D0%B2%D1%81%D0%B5%2C%20%D1%87%D1%82%D0%BE%20%D0%B7%D0%B0%D1%85%D0%BE%D1%87%D0%B5%D1%88%D1%8C!&amp;ate=AT-xa-4e0dc89547bc795b/-/-/4ee750671fd1c37c/2&amp;frommenu=1&amp;uid=4ee75067d0fa2d11&amp;description=%D0%9D%D0%B0%20SuperDeal%20%D0%B5%D1%81%D1%82%D1%8C%20%D1%81%D0%BA%D0%B8%D0%B4%D0%BA%D0%B8%20%D0%B4%D0%BE%2090%25%20%D0%BD%D0%B0%20%D0%BE%D0%B4%D0%B5%D0%B6%D0%B4%D1%83%2C%20%D1%81%D1%83%D1%88%D0%B8%2C%20%D1%84%D0%B8%D1%82%D0%BD%D0%B5%D1%81%2C%20%D0%B1%D0%BE%D1%83%D0%BB%D0%B8%D0%BD%D0%B3%20%D0%B8%20%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE%D0%B5%20%D0%B4%D1%80%D1%83%D0%B3%D0%BE%D0%B5!%20%D0%AF%20%D1%83%D0%B6%D0%B5%20%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D1%8E%D1%81%D1%8C!&amp;ct=1&amp;pre=http%3A%2F%2Fwww.superdeal.com.ua%2FKiev%2Fru%2Fdo%2Fdeal%2Finit%2F7938%2F&amp;tt=0"
+                           target="_blank"><span class="at300bs at15nc at15t_mymailru"></span></a>
+                        <a addthis:description="На SuperDeal есть скидки до 90% на одежду, суши, фитнес, боулинг и многое другое! Я уже пользуюсь!"
+                           addthis:title="Тебе какую скидку? Выбирай на SuperDeal скидки на все, что захочешь!"
+                           addthis:url="http://www.superdeal.com.ua/kiev/landing/index/index/id/166/aff/66-1-QWTEREK"
+                           title="Отправить в LiveJournal" class="addthis_button_livejournal at300b"
+                           href="http://www.addthis.com/bookmark.php?v=250&amp;winname=addthis&amp;pub=xa-4e0dc89547bc795b&amp;source=tbx32-250&amp;lng=ru-RU&amp;s=livejournal&amp;url=http%3A%2F%2Fwww.superdeal.com.ua%2Fkiev%2Fru%2Fdo%2Flanding%2Finit%2F185!66-1-QWTEREK&amp;title=%D0%A2%D0%B5%D0%B1%D0%B5%20%D0%BA%D0%B0%D0%BA%D1%83%D1%8E%20%D1%81%D0%BA%D0%B8%D0%B4%D0%BA%D1%83%3F%20%D0%92%D1%8B%D0%B1%D0%B8%D1%80%D0%B0%D0%B9%20%D0%BD%D0%B0%20SuperDeal%20%D1%81%D0%BA%D0%B8%D0%B4%D0%BA%D0%B8%20%D0%BD%D0%B0%20%D0%B2%D1%81%D0%B5%2C%20%D1%87%D1%82%D0%BE%20%D0%B7%D0%B0%D1%85%D0%BE%D1%87%D0%B5%D1%88%D1%8C!&amp;ate=AT-xa-4e0dc89547bc795b/-/-/4ee750671fd1c37c/3&amp;frommenu=1&amp;uid=4ee75067e26defe3&amp;description=%D0%9D%D0%B0%20SuperDeal%20%D0%B5%D1%81%D1%82%D1%8C%20%D1%81%D0%BA%D0%B8%D0%B4%D0%BA%D0%B8%20%D0%B4%D0%BE%2090%25%20%D0%BD%D0%B0%20%D0%BE%D0%B4%D0%B5%D0%B6%D0%B4%D1%83%2C%20%D1%81%D1%83%D1%88%D0%B8%2C%20%D1%84%D0%B8%D1%82%D0%BD%D0%B5%D1%81%2C%20%D0%B1%D0%BE%D1%83%D0%BB%D0%B8%D0%BD%D0%B3%20%D0%B8%20%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE%D0%B5%20%D0%B4%D1%80%D1%83%D0%B3%D0%BE%D0%B5!%20%D0%AF%20%D1%83%D0%B6%D0%B5%20%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D1%8E%D1%81%D1%8C!&amp;ct=1&amp;pre=http%3A%2F%2Fwww.superdeal.com.ua%2FKiev%2Fru%2Fdo%2Fdeal%2Finit%2F7938%2F&amp;tt=0"
+                           target="_blank"><span class="at300bs at15nc at15t_livejournal"></span></a>
+                        <a addthis:description="На SuperDeal есть скидки до 90% на одежду, суши, фитнес, боулинг и многое другое! Я уже пользуюсь!"
+                           addthis:title="Тебе какую скидку? Выбирай на SuperDeal скидки на все, что захочешь!"
+                           addthis:url="http://www.superdeal.com.ua/kiev/landing/index/index/id/166/aff/66-1-QWTEREK"
+                           title="Отправить в Twitter" class="addthis_button_twitter at300b" href="#"><span
+                            class="at300bs at15nc at15t_twitter"></span></a>
+                    </div>
+                    <div class="atclear"></div>
+                </div>
+            </div>
+            <div style="background:url('<?php echo $this->getSkinUrl('images/tell_bot.png')?>') no-repeat">&nbsp;</div>
+            <script src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4e0dc89547bc795b"
+                    type="text/javascript"></script>
+
+            <h2 class="captionMiddle"><?php echo $this->__('3. Получить бонусы за покупки на сайте') ?></h2><br>
+            <?php echo $this->__(
+            'Бонусы можно получить, делая покупки на портале SuperDeal.com.ua. За каждую пятую покупку (оплаченный заказ) вы будете получать 100 бонусов на ваш персональный счет.'
+        ) ?>
+            <br/><br/> <a href="<?php echo $this->getUrl() ?>alldeals.html">[Посмотреть список активных акций]</a>
+        </div>
+    </div>
+</div>

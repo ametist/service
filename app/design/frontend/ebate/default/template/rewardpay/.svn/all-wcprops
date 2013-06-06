@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/design/frontend/superdeal/default/template/rewardpay
+END
+how_to_get_bonuses.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/design/frontend/superdeal/default/template/rewardpay/how_to_get_bonuses.phtml
+END
+bonusblock.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/design/frontend/superdeal/default/template/rewardpay/bonusblock.phtml
+END
+balance.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/design/frontend/superdeal/default/template/rewardpay/balance.phtml
+END
+add.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/design/frontend/superdeal/default/template/rewardpay/add.phtml
+END
+help.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/design/frontend/superdeal/default/template/rewardpay/help.phtml
+END
+success.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/design/frontend/superdeal/default/template/rewardpay/success.phtml
+END
+error.phtml
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/design/frontend/superdeal/default/template/rewardpay/error.phtml
+END

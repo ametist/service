@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/code/local/Enterprise/CustomerBalance/etc
+END
+system.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/code/local/Enterprise/CustomerBalance/etc/system.xml
+END
+config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/code/local/Enterprise/CustomerBalance/etc/config.xml
+END
+logging.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/code/local/Enterprise/CustomerBalance/etc/logging.xml
+END

@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ebate_Rewardpay>
+            <version>0.1.0</version>
+        </Ebate_Rewardpay>
+    </modules>
+    <frontend>
+        <secure_url>
+            <rewardpay>/rewardpay/</rewardpay>
+        </secure_url>
+        <routers>
+            <rewardpay>
+                <use>standard</use>
+                <args>
+                    <module>Ebate_Rewardpay</module>
+                    <frontName>rewardpay</frontName>
+                </args>
+            </rewardpay>
+        </routers>
+        <layout>
+            <updates>
+                <rewardpay>
+                    <file>rewardpay.xml</file>
+                </rewardpay>
+            </updates>
+        </layout>
+    </frontend>
+ 
+    <global>
+        <blocks>
+            <rewardpay>
+                <class>Ebate_Rewardpay_Block</class>
+            </rewardpay>
+        </blocks>
+ 
+        <models>
+            <rewardpay>
+                <class>Ebate_Rewardpay_Model</class>
+            </rewardpay>
+        </models>
+        <helpers>
+            <rewardpay>
+                <class>Ebate_Rewardpay_Helper</class>
+            </rewardpay>
+        </helpers>
+ 
+        <resources>
+            <rewardpay_setup>
+                <setup>
+                    <module>Ebate_Rewardpay</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </rewardpay_setup>
+            <rewardpay_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </rewardpay_write>
+            <rewardpay_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </rewardpay_read>
+        </resources>
+        <!-- <events>
+            <sales_order_place_after>
+                <observers>
+                    <rewardpay>
+                        <class>rewardpay/observer</class>
+                        <method>processOrderPlace</method>
+                    </rewardpay>
+                </observers>
+            </sales_order_place_after>
+            <sales_order_place_before>
+                <observers>
+                    <rewardpay>
+                        <class>rewardpay/observer</class>
+                        <method>processOrderPlaceBefore</method>
+                    </rewardpay>
+                </observers>
+            </sales_order_place_before>
+        </events> -->
+    </global>
+ 
+    <default>
+        <payment>
+            <rewardpay>
+                <active>0</active>
+                <model>rewardpay/rewardpay</model>
+                <order_status>pending</order_status>
+                <title>Payment with customer reward points</title>
+            </rewardpay>
+        </payment>
+    </default>
+</config>

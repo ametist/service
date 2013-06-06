@@ -1,0 +1,22 @@
+<div id="userInfo">
+    <h1>Завершение покупки <a href="<?php echo Mage::getUrl('customer/status/reorder', array('order_id' => $this->getInvoiceId(), '_secure' => true)) ?>"><img src="<?php echo $this->getSkinUrl('images/Back_btn1.gif'); ?>" class="back-img" /></a></h1>
+    <div id="bkgSampleContent">
+
+        <h3>Спасибо Вам, за участие в акции! </h3>
+
+<p>Купон добавлен в раздел <a href="<?php echo $this->getUrl('customer/account/')?>">"Купоны"</a> Вашего профиля и отправлен на Ваш Email.</p>
+
+
+
+        <div id="checkout_bottom"> 
+            <img src="<?php print $this->getSkinUrl('images/qweimg.png')?>" align="left" >
+            &nbsp; Есть вопросы по оплате? Звони, мы поможем!&nbsp; 
+            <img src="<?php print $this->getSkinUrl('images/phoneimg.png')?>" style="vertical-align: middle;">
+            <div> 
+                <span style="font:15px/27px Arial; font-weight: bold;">044 5922228</span><br />
+                пн-пт (с 9 до 20)
+            </div>
+        </div>
+
+    </div>
+</div>

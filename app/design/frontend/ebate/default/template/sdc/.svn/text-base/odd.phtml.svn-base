@@ -1,0 +1,223 @@
+<script type="text/javascript">    
+    function initParams(methodCode) { 
+            var href = jQuery('a.clickTip').attr('rel'); 
+            var url;
+            
+            switch(methodCode) {
+                case 'upc_standart': url = href + 'upc/payment/help'; 
+                     text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('upc_help')->toHtml() ?>';
+                     break;
+                case 'ik_interkassaprivat': url = href + 'ik/interkassa/privathelp'; 
+                    text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('privat_help')->toHtml() ?>';
+                    break;
+                case 'osmp_standart': url = href + 'osmp/payment/help'; 
+                    text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('osmp_help')->toHtml() ?>';
+                    break;    
+                case 'bank': url = href + 'bank/payment/help';
+                    text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('bank_help')->toHtml() ?>';
+                    break; 
+                case 'bonuspay': url = href + 'bonuspay/payment/help'; 
+                    text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('bonuspay_help')->toHtml() ?>';
+                    break;  
+                case 'ik_interkassaterm': url = href + 'ik/interkassa/termhelp';
+                    text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('interkassaterm_help')->toHtml() ?>';
+                    break;
+                case 'ik_interkassawebmoney': url = href + 'ik/interkassa/webmoneyhelp';
+                    text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('interkassawebmoney_help')->toHtml() ?>';
+                    break;
+                case 'sms': url = href + 'sms/payment/help';
+                    text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('sms_help')->toHtml() ?>';
+                    break; 
+                case 'ik_interkassaliqpay': url = href + 'ik/interkassa/liqpayhelp';
+                    text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('interkassaliqpay_help')->toHtml() ?>';
+                    break;
+                case 'rewardpay': url = href + 'rewardpay/payment/help';
+                    text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('rewardpay_help')->toHtml() ?>';
+                    break;    
+                case 'privat24': url = href + 'privat24/payment/help';
+                    text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('main_privat_help')->toHtml() ?>';
+                    break;
+                case 'alfacredit': url = href + 'alfacredit/payment/help';
+                    text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('alfacredit_help')->toHtml() ?>';
+                    break;
+                case 'sdfree': url = href + 'free/payment/help';
+                    text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('sdfree_help')->toHtml() ?>';
+                    break;
+                case 'cash': url = href + 'cash/payment/help';
+                    text_method = '<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('cash_help')->toHtml() ?>';
+                    break;    
+            }
+        
+            var attr = jQuery('#olredyByQsubject-' + methodCode).css('display'); 
+            if (attr == 'none') {
+                jQuery('#olredyByQsubject-' + methodCode).css('display', 'block');
+                jQuery('#olredyByQsubject-' + methodCode).html(text_method);
+            } else {
+                jQuery('#olredyByQsubject-' + methodCode).css('display', 'none');
+            }
+    }    
+</script>
+<?php $prepareMethodsData = Mage::helper('sdc')->sortPaymentMethods($this->getMethods()); ?>
+<?php
+$params = $this->getRequest()->getParams();
+$codes = array('bonuspay', 'rewardpay');
+?>
+
+<!--<div class="payment payment_alt">
+    <h2 class="h2 h2_margin">Выберите способ оплаты</h2>
+    <ul id="checkout-payment-method-load">
+        <li class="payment__item payment__visa"><label>
+            <div class="payment__icon"></div>
+            <div class="payment__title"><input type="radio" name="aa"><b>Visa<br> MasterCard</b></div>
+            <div class="payment__help"></div>
+         </label></li>
+        <li class="payment__item payment__privat"><label>
+            <div class="payment__icon"></div>
+            <div class="payment__title"><input type="radio" name="aa"><b>Приват24</b></div>
+            <div class="payment__help"></div>
+        </label></li>
+        <li class="payment__item payment__bank"><label>
+            <div class="payment__icon"></div>
+            <div class="payment__title"><input type="radio" name="aa"><b>Касса банка</b></div>
+            <div class="payment__help"></div>
+        </label></li>
+        <li class="payment__item payment__terminal"><label>
+            <div class="payment__icon"></div>
+            <div class="payment__title"><input type="radio" name="aa"><b>Терминалы<br>
+                напрямую</b></div>
+            <div class="payment__help"></div>
+        </label></li>
+        <li class="payment__item payment__interkassa"><label>
+            <div class="payment__icon"></div>
+            <div class="payment__title"><input type="radio" name="aa"><b>Терминалы<br>
+            Интеркасса</b></div>
+            <div class="payment__help"></div>
+        </label></li>
+        <li class="payment__item payment__webmoney"><label>
+            <div class="payment__icon"></div>
+            <div class="payment__title"><input type="radio" name="aa"><b>Webmoney</b></div>
+            <div class="payment__help"></div>
+        </label></li>
+        <li class="payment__item payment__liqpay"><label>
+            <div class="payment__icon"></div>
+            <div class="payment__title"><input type="radio" name="aa"><b>LiqPay</b></div>
+            <div class="payment__help"></div>
+        </label></li>
+        <li class="payment__item payment__bonuses"><label>
+            <div class="payment__help"></div>
+            <div class="payment__info">На счету: <strong>50 бонусов</strong></div>
+            <div class="payment__title"><input type="radio" name="aa"><b>С бонусов</b></div>
+        </label></li>
+        <li class="payment__item payment__bonuses"><label>
+            <div class="payment__help"></div>
+            <div class="payment__info">На счету: <strong>50 грн</strong></div>
+            <div class="payment__title"><input type="radio" name="aa"><b>со счета</b></div>
+        </label></li>
+
+</ul>
+</div>-->
+
+<!--<ul class="sp-methods">-->
+
+<div class="payment payment_alt">
+    <h2 class="h2 h2_margin">Выберите способ оплаты</h2>
+    <ul id="checkout-payment-method-load">
+
+<?php foreach ($prepareMethodsData as $_title => $_code):  ?>
+<?php if(isset($params['order_id']) && in_array($_code, $codes) ) continue;  ?>
+   <?php if(!empty($_code)) : ?>    
+    
+        <?php if($_code == 'bonuspay') : ?>
+            
+            <li class="payment__item payment__bonuses">   
+                <div class="payment__help"></div>
+                <div class="payment__info">На счету: <strong><?php echo $this->getChildHtml('customer_balance'); ?> грн</strong></div>
+                
+                <div class="question" id="olredyByQ-<?php echo $_code ?>" onclick="initParams('<?php echo $_code ?>')">
+                    <div id="olredyByQsubject-<?php echo $_code ?>" class="informationBolckSmall-help"></div>
+                </div> 
+
+                <?php if( sizeof($this->getMethods()) > 1 ): ?>                
+                    <div class="payment__title">
+                    <input  id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $_title ?>" class="radio" />        
+                    <b><?php echo $_title; ?></b>
+                    </div>
+                <?php else: ?>
+                    <div class="payment__title">
+                    <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" />
+                    <b><?php echo $_title; ?></b>
+                    </div>
+                <?php endif; ?>
+                    
+           </li>
+        
+        <?php elseif($_code == 'rewardpay') : ?>
+            
+            <li class="payment__item payment__bonuses">   
+                
+                <div class="payment__help"></div>
+                <div class="payment__info">На счету: <strong><?php echo $this->getChildHtml('customer_bonuses'); ?> бонусов</strong></div>
+                
+                <div class="question" id="olredyByQ-<?php echo $_code ?>" onclick="initParams('<?php echo $_code ?>')">
+                    <div id="olredyByQsubject-<?php echo $_code ?>" class="informationBolckSmall-help"></div>
+                </div> 
+
+                <?php if( sizeof($this->getMethods()) > 1 ): ?>                
+                    <div class="payment__title">
+                    <input  id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $_title ?>" class="radio" />        
+                    <b><?php echo $_title; ?></b>
+                    </div>
+                <?php else: ?>
+                    <div class="payment__title">
+                    <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" />
+                    <b><?php echo $_title; ?></b>
+                    </div>
+                <?php endif; ?>
+                    
+           </li>
+           
+        <?php else: ?>  
+            
+            <li class="payment__item <?php echo $_code; ?>">   
+                <div class="payment__icon"></div>
+                <div class="question" id="olredyByQ-<?php echo $_code ?>" onclick="initParams('<?php echo $_code ?>')">
+                    <div id="olredyByQsubject-<?php echo $_code ?>" class="informationBolckSmall-help"></div>
+                </div> 
+
+                <?php if( sizeof($this->getMethods()) > 1 ): ?>                
+                    <div class="payment__title">
+                    <input  id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $_title ?>" class="radio" />        
+                    <b><?php echo $_title; ?></b>
+                    </div>
+                <?php else: ?>
+                    <div class="payment__title">
+                    <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" class="radio" />
+                    <b><?php echo $_title; ?></b>
+                    </div>
+                <?php endif; ?>
+                    <div class="payment__help"></div>
+           </li>
+            
+        <?php endif; ?>    
+        
+    
+    
+    <?php endif; ?>
+<?php endforeach; ?>
+    </ul>
+</div>
+<!--<a href="#" class="greenbutton greenbutton_big">Перейти к оплате <i class="greenbutton__arrow"></i></a>-->
+<input type="submit" name="" value="Перейти к оплате" class="greenbutton greenbutton_big" />
+
+
+<?php echo $this->getChildChildHtml('additional'); ?>
+<script type="text/javascript">
+//<![CDATA[
+<?php echo $this->getChildChildHtml('scripts'); ?>    
+//]]>
+</script>
+
+<!-- conformation dialog-box -->
+<div id="dialog-confirm" title="Подтверждения оплаты">
+    <center><p><span class="ui-icon ui-icon-alert"></span><b id="conformation-message"></b></p></center>
+</div>

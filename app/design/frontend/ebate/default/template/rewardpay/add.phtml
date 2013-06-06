@@ -1,0 +1,6 @@
+<?php $_product = $this->getProduct()?>
+<form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+    Колличество бонусов: <input type="text" name='qty' value="1"/>
+    <p>1 бонус = 1грн </p>
+    <input type="submit" value="<?php print $this->__('Продолжить')?>" class="button_blue_long"/>
+</form>

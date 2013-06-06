@@ -1,0 +1,89 @@
+Searching 34 files for "partner"
+
+C:\WebServers\home\service\www\app\code\local\Ebate\Affiliate\Block\Adminhtml\Affiliate\Edit.php:
+   18          {
+   19              if( Mage::registry('affiliate_data') && Mage::registry('affiliate_data')->getId() ) {
+   20:                 return Mage::helper('affiliate')->__("Edit Affiliate Partner '%s'", $this->htmlEscape(Mage::registry('affiliate_data')->getTitle()));
+   21              } else {
+   22                  return Mage::helper('affiliate')->__('Add Item');
+
+C:\WebServers\home\service\www\app\code\local\Ebate\Affiliate\Block\Adminhtml\Affiliate\Edit\Tab\Form.php:
+    5  	
+    6  	/**
+    7: 	 * get partner role id
+    8  	 * @return int
+    9  	 */
+   10: 	public function getPartnerRole()
+   11  	{
+   12  	   $collection = Mage::getModel('admin/role')->getCollection();
+   13  	   $collection->getSelect()
+   14: 		      ->where('role_name = ?', 'Affiliate Partners');
+   15: 	   $partner = '';   
+   16  	   foreach ($collection as $item)
+   17  	   {
+   18: 	     $partner = $item->getRoleId();
+   19  	   }
+   20  	   
+   21: 	   return $partner;
+   22  	}
+   23  	
+   ..
+   30  	    $collection = Mage::getModel('admin/role')->getCollection();
+   31  	    $collection->getSelect()
+   32: 		       ->where('parent_id = ?', $this->getPartnerRole())
+   33  		       ->join(
+   34  			    array('admin_user' => 'admin_user'),
+   ..
+   65  	    
+   66  	    $accouns = $this->getAccounts();
+   67: 	    $partner_account = $fieldset->addField('partner_account', 'select', array(
+   68  		'label' => Mage::helper('affiliate')->__('UserName'),
+   69: 		'name' => 'partner_account',
+   70  	    ));
+   71: 	    $partner_account->setData('values', $accouns);
+   72  	    
+   73  	    $fieldset->addField('status', 'select', array(
+   ..
+   97  
+   98              $fieldset->addField('created_time', 'hidden', array(
+   99:                 'label'     => Mage::helper('partnerlocation')->__('created_time'),
+  100                  'required'  => false,
+  101                  'name'      => 'created_time',
+
+C:\WebServers\home\service\www\app\code\local\Ebate\Affiliate\Block\Adminhtml\Affiliate\Grid.php:
+   19  		       ->joinLeft(
+   20  			    array('admin_user' => 'admin_user'),
+   21: 			    'admin_user.user_id = main_table.partner_account',
+   22  			    array('username' => 'admin_user.username')
+   23  			);
+
+C:\WebServers\home\service\www\app\code\local\Ebate\Affiliate\controllers\Adminhtml\AffiliateController.php:
+   97                      }
+   98  		    
+   99: 		    // custom sql for update partner account
+  100: 		     if(isset($postData['partner_account'])) {
+  101  		       $write = Mage::getSingleton('core/resource')->getConnection('core_write');
+  102: 		       $write->query("UPDATE affiliate SET partner_account = '".$postData['partner_account']."' WHERE affiliate_id = '".$affiliateModel->getId()."'");
+  103  		     }
+  104  		    
+
+C:\WebServers\home\service\www\app\code\local\Ebate\Affiliate\sql\affiliate_setup\mysql4-upgrade-0.2.0-0.3.0.php:
+    4  
+    5  $installer->run("
+    6:     ALTER TABLE {$this->getTable('affiliate')} ADD `partner_account` int(10) unsigned NOT NULL COMMENT 'Reference with admin_user.user_id';
+    7  ");
+    8  
+
+19 matches across 5 files
+
+
+Searching 34 files for "partnerlocation"
+
+C:\WebServers\home\service\www\app\code\local\Ebate\Affiliate\Block\Adminhtml\Affiliate\Edit\Tab\Form.php:
+   97  
+   98              $fieldset->addField('created_time', 'hidden', array(
+   99:                 'label'     => Mage::helper('affiliate')->__('created_time'),
+  100                  'required'  => false,
+  101                  'name'      => 'created_time',
+
+1 match in 1 file

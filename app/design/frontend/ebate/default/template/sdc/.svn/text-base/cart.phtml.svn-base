@@ -1,0 +1,320 @@
+<h1 class="h1 h1_margin">Оформление заказа</h1>
+    <form id="order_form" action="<?php echo $this->getUrl('checkout/onepage/saveOrder') ?>" method="post">        
+<!-- BEGIN  checkout-->
+<div class="checkout">
+    <!-- BEGIN  checkout__wrap-->
+    
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php $shipping_products = array("simple", "configurable"); ?>
+    
+    <div class="checkout__wrap">
+        
+        
+       <?php foreach ($this->getItems() as $_item): ?>
+          <?php echo $this->getItemHtml($_item) ?>
+        
+        
+        
+        <div class="checkout__address">
+            Выберите адрес:
+            <div class="selectreplaced"><i></i>
+                
+              <?php
+                $product_id = $_item->getData('product_id');
+                $product = Mage::getModel('catalog/product')->load($product_id);
+                $partner = Mage::getModel('partnerlocation/partnerlocation')->getCollection()
+                    ->addFieldToFilter('dealpartner_id', array($product->getData('partner')));
+                ?>
+                <?php if (!in_array($product->getTypeId(), $shipping_products)) : ?>
+                <?php if ($product_id == 9608 || $product_id == 9851): ?>
+                <?php $partner = $partner->addFieldToFilter(
+                    'store_id', array(Mage::app()->getStore()->getId())
+                ); ?>
+                <?php if (count($partner) == 1): ?>
+                    <select name="partner_location" class="selectreplaced__actual">
+                        <?php foreach ($partner as $location): ?>
+                        <option value="<?php print $location->getId() ?>"><?php print
+                            $location->getName() . ' ' . $location->getAddress() ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <?php elseif (count($partner) > 1): ?>
+                    <select name="partner_location" class="selectreplaced__actual">
+                        <option selected="selected" value="-1">Выберите наиболее удобный для Вас адрес
+                        </option>
+                        <?php foreach ($partner as $location): ?>
+                        <option value="<?php print $location->getId() ?>"><?php print
+                            $location->getName() . ' ' . $location->getAddress() ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <?php endif ?>
+                <?php elseif ($product_id != 5323): ?>
+                <?php if (count($partner) == 1): ?>
+                    <select name="partner_location" class="selectreplaced__actual">
+                        <?php foreach ($partner as $location): ?>
+                        <option value="<?php print $location->getId() ?>"><?php print
+                            $location->getName() . ' ' . $location->getAddress() ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <?php elseif (count($partner) > 1): ?>
+                    <select name="partner_location"  class="selectreplaced__actual">
+                        <option selected="selected" value="-1">Выберите наиболее удобный для Вас адрес
+                        </option>
+                        <?php foreach ($partner as $location): ?>
+                        <option value="<?php print $location->getId() ?>"><?php print
+                            $location->getName() . ' ' . $location->getAddress() ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <?php endif ?>
+                <?php endif ?>
+                <?php else : ?>
+                <select name="partner_location" class="selectreplaced__actual">
+                        <option selected="selected" value="0">Віталік</option>
+                        <option selected="selected" value="1">Зоя</option>
+                        <option selected="selected" value="2">Женя</option>
+                        <option selected="selected" value="3">Сергій</option>
+                        <option selected="selected" value="4">Юджин</option>
+                        <option selected="selected" value="5">РУКОВОДИТЕЛЬ</option>
+                </select>
+                <?php endif ?>  
+
+            <?php endforeach ?>
+                
+            <div class="selectreplaced__value">Выберите адрес</div></div>
+        </div>
+        
+    </div>
+    <!-- END checkout__wrap-->
+                
+    
+    <input type="hidden" name="checkout_method" value="onepage"/>
+            
+            <div id="personalinfoOrder" <?php if ($this->issetCustomerData() == true) : ?> style="display:none" <?php endif; ?>>
+                
+                <br /><h3>Персональные данные</h3>
+                
+                 <div class="checkout__personal-data"> 
+                     
+                        <?php echo $this->getLayout()->createBlock('customer/widget_unionnamesurname')
+                        ->setObject($this->getQuote()->getCustomer())->setFieldIdFormat('billing:%s')
+                        ->setFieldNameFormat('billing[%s]')->toHtml() ?>
+
+                     <br />
+                     <div class="name-telephone">
+                        <input type="text" name="billing[telephone]" value="<?php echo $this->getBillingPhone(); ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" id="billing:telephone" placeholder="Контактный телефон"/>
+                    </div>    
+                            
+                    <input type="hidden" name="billing[email]" id="billing:email" readonly="readonly"
+                            value="<?php echo $this->getQuote()->getCustomer()->getEmail() ?>"
+                            title="<?php echo $this->__('Email Address') ?>"
+                            class="input-text validate-email required-entry"/>
+                    <input type="hidden" title="<?php echo $this->__('City') ?>" name="billing[city]"
+                            readonly="readonly"
+                            value="<?php echo $this->getQuote()->getCustomer()->getStore()->getGroup()
+                                ->getName() ?>" class="input-text required-entry" id="billing:city"/>
+                </div>
+
+                <?php if ($this->getBillingSuffix() == 'true') : ?>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('sales_conditions_accepted')
+                    ->toHtml() ?>
+                <?php else : ?>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('sales_conditions')->toHtml() ?>
+                <?php endif; ?>
+                <div id="agreement_alert_message" style="display: none;">Необходимо ознакомиться и согласиться с правилами</div>
+            </div>
+           <!-- BEGIN  checkout__details-->
+            <?php if (!in_array($product->getTypeId(), $shipping_products)) : ?>
+            <?php if (Mage::getConfig()->getModuleConfig('SuperDeal_Friendgift')->is('active')) : ?>
+             <?php if ($product) : ?>
+                <?php if (Mage::helper('sdc')->getServicePrice($product) != 0) : ?>
+                    <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('friendgift/gift-info.phtml')->toHtml(); ?>
+                <?php endif; ?>
+             <?php endif; ?>
+            <?php endif; ?>
+            <?php endif; ?>
+    
+           <?php 
+               // shipping
+               if (in_array($product->getTypeId(), $shipping_products)) :
+                  echo $this->getChildHtml('shipping'); 
+               echo $this->getChildHtml('shipping_method'); 
+               endif;
+            ?>
+    <!-- END checkout__details-->
+</div>
+<!-- END checkout-->
+            
+<!-- BEGIN  payment-->
+
+<?php if((time() % 2) == 0): ?>
+    <?php echo $this->getChildHtml('checkout_cart_even'); ?>
+<?php else: ?>
+    <?php echo $this->getChildHtml('checkout_cart_odd'); ?>
+<?php endif; ?>    
+
+<!-- END payment-->
+
+<input type="hidden" id="current_pay_type" name="payment_type" value="null">
+</form>
+
+<div class="linkmore linkmore_alt">
+    Есть вопросы по оплате? Звоните, мы поможем:  <strong>+380 44 592 22 28</strong>   <span>пн—пт 9:00…19:00 </span>
+</div>
+
+    <!-- Google Code for new buyers1 Remarketing List -->
+<script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 978162788;
+    var google_conversion_language = "en";
+    var google_conversion_format = "3";
+    var google_conversion_color = "ffffff";
+    var google_conversion_label = "hUI1CPS99BYQ5Ki20gM";
+    var google_conversion_value = 0;
+    /* ]]> */
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt=""
+             src="http://www.googleadservices.com/pagead/conversion/978162788/?label=hUI1CPS99BYQ5Ki20gM&amp;guid=ON&amp;script=0"/>
+    </div>
+</noscript>
+
+<!-- Google Code for &#1073;&#1072;&#1077;&#1088;&#1099; Conversion Page -->
+<script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 962243587;
+    var google_conversion_language = "ru";
+    var google_conversion_format = "2";
+    var google_conversion_color = "ffffff";
+    var google_conversion_label = "7ozvCN3AhQQQg9jqygM";
+    var google_conversion_value = 0;
+    if (1) {
+        google_conversion_value = 1;
+    }
+    /* ]]> */
+</script>
+<!-- facebook code -->
+<script type="text/javascript">
+var fb_param = {};
+fb_param.pixel_id = '6006109308812';
+fb_param.value = '0.00';
+(function(){
+  var fpw = document.createElement('script');
+  fpw.async = true;
+  fpw.src = (location.protocol=='http:'?'http':'https')+'://connect.facebook.net/en_US/fp.js';
+  var ref = document.getElementsByTagName('script')[0];
+  ref.parentNode.insertBefore(fpw, ref);
+})();
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6006109308812&amp;value=0" /></noscript>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt=""
+             src="http://www.googleadservices.com/pagead/conversion/962243587/?value=1&amp;label=7ozvCN3AhQQQg9jqygM&amp;guid=ON&amp;script=0"/>
+    </div>
+</noscript>
+<script type="text/javascript">
+    //<![CDATA[
+    jQuery.noConflict();
+    jQuery(document).ready(function () {
+//        jQuery('input[type=submit]').hide();
+//        jQuery('input.radio').each(function () {
+//            jQuery(this).hide();
+//        });
+        jQuery('li.payment__item').unbind("click").click(function (event) {
+
+            event.stopPropagation;
+            if (typeof(jQuery(this).find('input.radio').attr('selected')) == "undefined") {
+                jQuery('li.payment__item').each(function () {
+                    jQuery(this).find('input:radio').attr('checked', false);
+                });
+                jQuery(this).find('input:radio').attr('checked', true);
+            }
+
+            var firstname = jQuery('div.name-firstname input[type=text]').val();
+            var lastname = jQuery('div.name-lastname input[type=text]').val();
+            var telephone = jQuery('div.name-telephone input[type=text]').val();
+            var inventory_num = jQuery('#inventory_num').val();
+            var shipping_meth = jQuery('#shipping_methods').val();
+            var re = new RegExp(/[a-zа-я]+/i);
+            var ret = new RegExp(/[0-9]+/i);
+            var rei = new RegExp(/^[0-9]+$/i);
+            var re_f = re.exec(firstname) == null;
+            var re_l = re.exec(lastname) == null;
+            var ret_t = ret.exec(telephone) == null;
+            var rei_i = rei.exec(inventory_num) == null;
+            var is_firstname = (firstname.length > 1 && !re_f);
+            var is_lastname = (lastname.length > 1 && !re_l);
+            var is_telephone = (telephone.length > 1 && !ret_t);
+            if (inventory_num) {var is_inventory = (inventory_num.length > 0 && !rei_i);}
+            
+            if (jQuery('#order_form input.radio[name="payment[method]"]:checked').length != 1) {
+                alert('<?php print $this->__('Please specify payment method.') ?>');
+            } else if (!is_firstname) {
+                var alert_text = "<?php print $this->__('Пожалуйста, заполните поле \"Имя\".') ?>";
+                alert(alert_text);
+            } /*else if (!is_telephone) {
+                var alert_text = "<?php print $this->__('Пожалуйста, заполните поле \"Контактный телефон\".') ?>";
+                alert(alert_text);
+            } else if(!is_lastname){
+                var alert_text = '<?php print $this->__("Пожалуйста, заполните поле \'Фамилия\'.") ?>';
+                alert(alert_text);
+            }*/ else if (typeof(jQuery('#order_form input.order_check').attr('checked')) == 'undefined') {
+                jQuery('#agreement_alert_message').show();
+            } else if (jQuery('#order_form select[name=partner_location]').val() == -1) {
+                //jQuery(window).scrollTop(jQuery('#order_form select[name=partner_location]').position().top - 50);
+                jQuery('#order_form select[name=partner_location]').css("border-color", "#f43535");
+                var alert_text = '<?php print $this->__("Пожалуйста, выберите адрес.") ?>';
+                alert(alert_text);
+            } else if (shipping_meth == "Выберите способ доставки") {
+                var alert_text = "<?php print $this->__('Пожалуйста, выберите способ доставки.') ?>";
+                alert(alert_text);
+            } else if ((shipping_meth == "flatrate_flatrate") && (!is_inventory)) {
+                var alert_text = "<?php print $this->__('Пожалуйста, заполните поле \"Номер склада\".') ?>";
+                alert(alert_text);
+            } else {
+                jQuery('#rewardpay').live('click', function () {
+                    var qty = jQuery('select.qty_selector').val();
+                    var amount = jQuery('input[name=base_price]').val();
+                    var total = qty * amount;
+                    jQuery('#conformation-message').html('С вашего счета будет снято ' + total + ' бонусов для оплаты заказа');
+                });
+                jQuery('#bonuspay').live('click', function () {
+                    var qty = jQuery('select.qty_selector').val();
+                    var amount = jQuery('input[name=base_price]').val();
+                    var total = qty * amount;
+                    jQuery('#conformation-message').html('С вашего счета будет снято ' + total + ' гривен для оплаты заказа');
+                });
+
+                jQuery('#rewardpay, #bonuspay').live('click', function () {
+                    jQuery("#dialog-confirm").dialog({
+                        resizable:false,
+                        height:190,
+                        modal:true,
+                        buttons:{
+                            "Да":function () {
+                                jQuery(this).dialog("close");
+                                jQuery('#order_form').submit();
+                            },
+                            "Нет":function () {
+                                jQuery(this).dialog("close");
+                                return false;
+                            }
+                        }
+                    });
+                });
+
+                jQuery('#privat24,#upc_standart, #ik_interkassaprivat, #osmp_standart, #bank, #ik_interkassaterm, #ik_interkassawebmoney, #sms, #ik_interkassaliqpay, #alfacredit, #sdfree, #cash').live('click', function () {
+                    jQuery('#order_form').submit();
+                });
+
+            }
+
+        });
+
+    });
+    //]]>     
+</script>

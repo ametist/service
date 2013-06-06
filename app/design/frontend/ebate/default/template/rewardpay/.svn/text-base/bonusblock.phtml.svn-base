@@ -1,0 +1,16 @@
+<?php if ($this->showBonusBlock()): ?>
+    <div id="bonusesvidjet">
+	<div id="firrowbon"><b>1 бонус = 1 грн</b></div>
+	<div id="secrowbon"> 
+	    <table align="center">
+		<tbody><tr>
+			<td style="height: 50px; font:bold 14px/16px Arial; color:#578500; text-align: right;">Бонусов на Вашем счету:</td>
+			<td valign="bottom" style="height: 50px; font:bold 27px/40px Arial; float: right; color:#064a76; text-align: left; vertical-align: bottom !important;"><?php print $this->getCustomerBalance()?></td>
+		    </tr>
+		</tbody></table>
+	</div>
+	<div id="firstarrowsmblock1" onclick="window.location = '<?php echo $this->getUrl() ?>bonuspay/getbonuses/index';" class="smallblockbutt">&nbsp;</div>
+	<div onclick="window.location = '<?php echo Mage::getBaseUrl() ?>customer/account/';" id="firstarrowsmblock2" class="smallblockbutt">&nbsp;</div>
+    </div>
+<br />
+<?php endif; ?>   

@@ -1,0 +1,56 @@
+<?php if($this->getRequest()->getParam('status') == 'ok') : ?>
+  <div id="messages"><ul class="messages"><li class="success-msg"><ul><li><span>Бонусы успешно начислены.</span></li></ul></li></ul></div>
+<?php endif; ?>
+<br /><br />  
+
+<h2>Массовое начисление бонусов:</h2>
+
+<br /><br />  
+
+<form action="<?php echo Mage::getBaseUrl() ?>mmanager/reward_manualadd/save" method="POST" name="add_bonuses">
+    <table border="0" cellpadding="15" cellspacing="15">
+        <tr>
+            <td><b>Кол-во бонусов:</b></td>
+            <td>  
+                <input type="text" name="bonus" style="width:350px;" />
+            </td>
+        </tr>
+        <tr>
+            <td><b>Email 'ы:</b></td>
+            <td>
+                <textarea name="emails" style="width:350px;height:200px;"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td><b>Текст письма незарег.:</b></td>
+            <td>
+                <textarea name="letter1" style="width:350px;height:200px;"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td><b>Текст письма рег.:</b></td>
+            <td>
+                <textarea name="letter2" style="width:350px;height:200px;"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td><b>Комментарий:</b></td>
+            <td>
+                <input type="text" name="comment" style="width:350px;" />
+            </td>
+        </tr>
+        <tr>
+            <td><b>Аффилейт:</b></td>
+            <td>
+                <input type="text" name="affiliate" style="width:350px;" />
+            </td>
+        </tr>
+        <tr>
+            <input name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" type="hidden">
+            <td colspan="2"><input type="submit" name="save" value="Начислить" class="custom-button"/></td>  
+        </tr>
+    </table>  
+</form>
+
+
+

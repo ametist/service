@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Ebate_Affiliate>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Ebate_Affiliate>
+        <Ebate_Rewardpay>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Ebate_Rewardpay>
+	    <Ebate_MYCheckout>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Ebate_MYCheckout>
+        <Ebate_Free>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Payment/>
+            </depends>
+        </Ebate_Free>
+    </modules>
+</config>

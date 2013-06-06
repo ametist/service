@@ -101,7 +101,7 @@ class Mage_Core_Model_Session_Abstract_Varien extends Varien_Object
             }
         }
 
-        if (isset($cookieParams['domain'])) {
+        if (isset($cookieParams['domain']) && !in_array("127.0.0.1", self::getValidatorData())) {
             $cookieParams['domain'] = $cookie->getDomain();
         }
 

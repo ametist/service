@@ -1,0 +1,156 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php 
+/**
+ * @see Mage_Checkout_Block_Cart_Shipping
+ */
+?>
+<?php $_shipping_methods = Mage::getModel('sdc/onepage')->getAllShippingMethods(); ?>
+<?php $addresses = Mage::helper('customer/address')->getShippingData(); ?>
+<?php $_stores = Mage::getModel('customer/customer')->getCities(); ?>
+<!-- BEGIN WRAP -->
+<div class="checkout__itogo">Итого к оплате: <strong>12311 грн</strong></div>
+<div class="checkout__wrap">
+  <form action="/" class="form">
+    <h2 class="h2">Выберите способ доставки</h2>
+    <div class="formline">
+      <div class="select">
+        <select class="shippingSelects">
+          <option value="0">курьером</option>
+          <option value="1">мармотами</option>
+          <option value="2">Санта Клаусом</option>
+        </select>
+        <input type="text" class="select__value" placeholder="курьером">
+        <i></i>
+      </div>
+    </div>
+    <h2 class="h2">Укажите свои контактные данные</h2>
+    <div class="formline formline_contacts">
+      <input type="radio" class="formline__radio"  name="radio-check"checked>
+      <div class="select">
+        <select class="shippingSelects">
+          <option value="0">Город</option>
+          <option value="1">Киев</option>
+        </select>
+        <input type="text" class="select__location" placeholder="<?php echo $this->__('Город') ?>">
+        <i></i>
+      </div>
+      <input type="text" class="formline__name" name="" placeholder="ФИО">
+      <input type="text" class="formline__street"  name="" placeholder="Улица">
+      <input type="text" class="formline__short_check" name="" placeholder="<?php echo $this->__('Дом') ?>">
+      <input type="text"  class="formline__short_check"  name="" placeholder="<?php echo $this->__('Кв.') ?>">
+      <input type="text"  class="formline__zip"  name="" placeholder="Индекс">
+      <input type="text" class="formline__tel" name="" placeholder="+380 __ ___-__-__">
+    </div>
+    <div class="formline formline_contacts">
+      <input type="radio" class="formline__radio" name="radio-check">
+      <div class="select">
+        <select class="shippingSelects">
+          <option value="0">Город</option>
+          <option value="1">Киев</option>
+        </select>
+        <input type="text" class="select__location" placeholder="<?php echo $this->__('Город') ?>">
+        <i></i>
+      </div>
+      <input type="text" class="formline__name" name="" placeholder="ФИО">
+      <input type="text" class="formline__street"  name="" placeholder="Улица">
+      <input type="text" class="formline__short_check" name="" placeholder="<?php echo $this->__('Дом') ?>">
+      <input type="text"  class="formline__short_check"  name="" placeholder="<?php echo $this->__('Кв.') ?>">
+      <input type="text"  class="formline__zip"  name="" placeholder="Индекс">
+      <input type="text" class="formline__tel" name="" placeholder="+380 __ ___-__-__">
+    </div>
+    <a href="#" class="button button_check">Добавить адрес</a>
+  </form>
+  <br>
+  <!-- BEGIN  payment-->
+  <div class="payment payment_alt">
+    <h2 class="h2 h2_margin">Выберите способ оплаты</h2>
+    <ul>
+      <li class="payment__item payment__visa"><label>
+        <div class="payment__icon"></div>
+        <div class="payment__title"><input type="radio" name="aa"><b>Visa<br> MasterCard</</div>
+        <div class="payment__help"></div>
+      </label></li>
+      <li class="payment__item payment__privat"><label>
+        <div class="payment__icon"></div>
+        <div class="payment__title"><input type="radio" name="aa"><b>Приват24</b></div>
+        <div class="payment__help"></div>
+      </label></li>
+      <li class="payment__item payment__bank"><label>
+        <div class="payment__icon"></div>
+        <div class="payment__title"><input type="radio" name="aa"><b>Касса банка</b></div>
+        <div class="payment__help"></div>
+      </label></li>
+      <li class="payment__item payment__terminal"><label>
+        <div class="payment__icon"></div>
+        <div class="payment__title"><input type="radio" name="aa"><b>Терминалы<br>
+напрямую</b></div>
+        <div class="payment__help"></div>
+      </label></li>
+      <li class="payment__item payment__interkassa"><label>
+        <div class="payment__icon"></div>
+        <div class="payment__title"><input type="radio" name="aa"><b>Терминалы<br>
+Интеркасса</b></div>
+        <div class="payment__help"></div>
+      </label></li>
+      <li class="payment__item payment__liqpay"><label>
+        <div class="payment__icon"></div>
+        <div class="payment__title"><input type="radio" name="aa"><b>LiqPay</b></div>
+        <div class="payment__help"></div>
+      </label></li>
+      <li class="payment__item payment__sms"><label>
+        <div class="payment__icon"></div>
+        <div class="payment__title"><input type="radio" name="aa"><b>SMS</b></div>
+        <div class="payment__help"></div>
+      </label></li>
+      <li class="payment__item payment__webmoney"><label>
+        <div class="payment__icon"></div>
+        <div class="payment__title"><input type="radio" name="aa"><b>Webmoney</b></div>
+        <div class="payment__help"></div>
+      </label></li>
+      <li class="payment__item payment__bonuses"><label>
+        <div class="payment__help"></div>
+        <div class="payment__info">На счету: <strong>50 бонусов</strong></div>
+        <div class="payment__title"><input type="radio" name="aa"><b>С бонусов</b></div>
+      </label></li>
+      <li class="payment__item payment__bonuses"><label>
+        <div class="payment__help"></div>
+        <div class="payment__info">На счету: <strong>50 грн</strong></div>
+        <div class="payment__title"><input type="radio" name="aa"><b>со счета</b></div>
+      </label></li>
+    </ul>
+  </div>
+  <!-- END payment-->        
+</div>
+<!-- end wrap -->
+        
+<div class="checkout__pay">
+  <a href="#" class="greenbutton greenbutton_big">Перейти к оплате <i class="greenbutton__arrow"></i></a>
+</div>
+      
+      
+      

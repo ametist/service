@@ -1,0 +1,4 @@
+<?php
+$helper = Mage::helper('enterprise_reward');
+print $this->getPointsBalance();
+?>

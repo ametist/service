@@ -612,16 +612,24 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
             
 
             $billing = $checkout->saveBilling($billingAddress, false);
-            
+            $shipping = $checkout->saveShipping($billingAddress, false);
+            $checkout->saveShippingMethod('flatrate_flatrate');
+
             //STEP(6)
             /*
             * $checkout->saveOrder() returns array holding empty object
             * of type Mage_Checkout_Model_Type_Onepage
             */
             $checkout->saveOrder();
+            die('1');
+            #$product_id = $this->_getOrder()->getProductId();
+            # getData('real_url') . ?oid=""
+            # $encryptedData = Mage::helper('core')->encrypt(base64_encode("\n\rI start with a carriage return"));
+            # $decyptedData = base64_decode(Mage::helper('core')->decrypt($encryptedData));
+
+            echo $this->_getOrder()->getId(); die();
 
             $service_url = Mage::helper('catalog')->getServiceUrl($this->_getOrder());
-            #$orderId = $this->_getOrder()->getId();
             $storeId = Mage::app()->getStore()->getId();
                 $paymentHelper = Mage::helper("payment");
                 $zeroSubTotalPaymentAction = $paymentHelper->getZeroSubTotalPaymentAutomaticInvoice($storeId);
@@ -654,10 +662,10 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action
         }
          $redirectUrl = $this->getOnepage()->getCheckout()->getRedirectUrl();
 
-            $checkout->getQuote()->save();
+         $checkout->getQuote()->save();
             
-            // redirect to service           
-            $this->_redirectUrl($service_url); 
+         // redirect to service           
+         $this->_redirectUrl($service_url); 
     }
 
     /**

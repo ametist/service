@@ -1,0 +1,37 @@
+<div id="userInfo">
+    <h1>Спасибо, покупка успешно совершена!</h1>
+    <div id="bkgSampleContent">
+        <div style="font-weight: bold">
+            <p>С Вашего бонусного счета снято <?php print $this->getAmountDelta()?> бонусов.</p>
+            
+            <?php if ((Mage::helper('bonuspay')->getProductType() == "simple") || (Mage::helper('bonuspay')->getProductType() == "configurable")) : ?>
+                <p>Ваша(ши) покупки добавлены в раздел <a href="<?php print $this->getUrl('customer/account/')?>">"Покупки"</a> Вашего профиля. </p>   
+                <?php $counter = $this->getCouponCountLeft(); 
+                if ($this->getCouponCountLeft() != -1): ?>
+                    <p>Вам осталость сделать <?php echo 5 - $counter?> <?php if($counter == 4) {echo 'покупки';} elseif($counter == 0) {echo 'покупок';} else {echo 'покупки';}?> для получения 10 бонусов на персональный счет!</p>
+                <?php endif; ?>
+                <p>Расскажите друзьям об этом предложении и наслаждайтесь скидками вместе! А если они совершат первую покупку, Вы получите 50 бонусов!</p>
+            <?php else : ?>
+                <?php if ($this->getLastOrderCount() == 1) : ?>
+                    <p>Купон добавлен в раздел <a href="<?php print $this->getUrl('customer/account/')?>">"Купоны"</a> Вашего профиля и отправлен на Ваш Email. <a href="<?php print $this->getlastOrderCouponUrl()?>">Посмотреть</a> или распечатать купон.</p>
+                <?php else : ?>
+                    <p>Купоны добавлены в раздел <a href="<?php print $this->getUrl('customer/account/')?>">"Купоны"</a> Вашего профиля и отправлены на Ваш Email. <a href="<?php print $this->getUrl('customer/account/')?>">Посмотреть</a> или распечатать купоны.</p>   
+                <?php endif; ?>
+                <?php $counter = $this->getCouponCountLeft(); 
+                    if ($this->getCouponCountLeft() != -1): ?>
+                    <p>Вам осталость приобрести <?php echo 5 - $counter?> <?php if($counter == 4) {echo 'купон';} elseif($counter == 0) {echo 'купонов';} else {echo 'купона';}?> для получения 10 бонусов на персональный счет!</p>
+                <?php endif; ?>
+                <p>Расскажите друзьям об этой акции и наслаждайтесь скидками вместе! А если они совершат первую покупку, Вы получите 50 бонусов!</p>
+            <?php endif; ?>    
+        	
+                <div class="show_friends_header"></div>
+        	<div class="show_friends">
+        		<h3 class="font-black">Отправьте друзьям Вашу уникальную ссылку:</h3>
+        		<input type="text" value="<?php echo $this->getLastPurchaseUrl()?>" name="link" id="show-friend-link" class="input_subscribe">
+            </div>
+            <div class="show_friends_footer"></div>
+        </div>
+    </div>
+</div>
+
+і

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <!-- Mage_Customer -->
+    </default>
+    <rewardpay_payment_error>
+	<reference name="content">
+	    <block type="rewardpay/instructions" name="rewardpay.payment.instructions" template="rewardpay/error.phtml"/>
+	</reference>
+    </rewardpay_payment_error>
+    <rewardpay_payment_success>
+	<reference name="content">
+	    <block type="rewardpay/instructions" name="rewardpay.payment.instructions" template="rewardpay/success.phtml"/>
+	</reference>
+    </rewardpay_payment_success>
+    <checkout_cart_index>
+<!--        <reference name="checkout.cart.top_methods">
+            <block type="bank/instructions" name="checkout.cart.methods.bonuspay.top" before="-" template="bonuspay/balance.phtml"/>
+        </reference>-->
+
+	<reference name="sdc.checkout.payment.methods">
+	    <block type="enterprise_reward/checkout_payment_additional" name="payment.method.rewardpay" before="-" template="rewardpay/balance.phtml"/>
+	</reference>
+    </checkout_cart_index>  
+    <rewardpay_payment_help>
+	<reference name="content">
+	    <block type="rewardpay/instructions" name="rewardpay.payment.help" template="rewardpay/help.phtml"/>
+	</reference>
+    </rewardpay_payment_help>
+</layout>

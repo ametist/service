@@ -1,0 +1,258 @@
+<?php
+
+#require_once 'Mage/Checkout/controllers/OnepageController.php';
+require_once Mage::getModuleDir('controllers', 'Mage_Checkout') . DS . 'OnepageController.php';
+
+class SD_SDCheckout_Checkout_OnepageController extends Mage_Checkout_OnepageController {
+
+    public function saveOrderAction() {
+        $start_time = microtime(true);
+        // delete reorder session
+        Mage::getSingleton('checkout/session')->unsetData('orderId');
+        
+        try {
+            $checkout = Mage::getSingleton('checkout/type_onepage');
+            $payment = $this->getRequest()->getPost('payment');
+            $cart = Mage::getSingleton('checkout/cart');
+            $cartData = $this->getRequest()->getParam('cart');
+            if ($payment['method'] == 'sms' && !$cart->getQuote()->hasProductId(5323)) {                
+                $cartData['qty'] = 1;
+            }
+            $cartData = $this->getRequest()->getParam('cart');
+                        
+            if (is_array($cartData)) {
+                $filter = new Zend_Filter_LocalizedToNormalized(
+                                array('locale' => Mage::app()->getLocale()->getLocaleCode())
+                );
+                foreach ($cartData as $index => $data) {
+                    if (isset($data['qty'])) {
+                        $cartData[$index]['qty'] = $filter->filter($data['qty']);
+                    }
+                }
+                #$cart = Mage::getSingleton('checkout/cart');
+
+                if (!$cart->getCustomerSession()->getCustomer()->getId() && $cart->getQuote()->getCustomerId()) {//!!!!ACHTUNG
+                    $cart->getQuote()->setCustomerId(null);
+                }
+
+                $cartData = $cart->suggestItemsQty($cartData);
+                $cart->updateItems($cartData)
+                        ->save();
+            }
+
+            $checkout->savePayment(array('method' => $payment['method']));
+
+            $billingDefault = array(
+                'address_id' => '',
+                'company' => '',
+                'street' => array('Address part 1', 'Address part 2'),
+                'postcode' => '31000',
+                'country_id' => 'UA',
+                'fax' => '',
+                'customer_password' => '',
+                'save_in_address_book' => ''
+            );
+            $shippingDefault = array(
+                'address_id' => '',
+                'company' => '',
+                'street' => array('Address part 1', 'Address part 2'),
+                'postcode' => '31000',
+                'country_id' => 'UA',
+                'fax' => '',
+                'customer_password' => '',
+                'save_in_address_book' => ''
+            );
+
+
+            $billingAddress = $this->getRequest()->getParam('billing');
+            $billingAddress = array_merge($billingAddress, $billingDefault);
+            $billingAddress['telephone'] = $billingAddress['telephone'] ? $billingAddress['telephone'] : '0123456789';
+            $billingAddress['use_for_shipping'] = 0;
+            $shippingAddress = $this->getRequest()->getParam('shipping') ? $this->getRequest()->getParam('shipping') : array();
+            $shippingAddress = array_merge($shippingAddress, $shippingDefault);
+            $checkoutMethod = $this->getRequest()->getParam('checkout_method', false);
+            $checkout->saveCheckoutMethod($checkoutMethod);
+            //STEP(1)
+
+            if (!$billingAddress['firstname'] || !$billingAddress['lastname']) {
+                Mage::throwException($this->__('Пожалуйста, заполните поля "Имя" и "Фамилия"'));
+            } else {
+                $customerId = Mage::getSingleton('customer/session')->getCustomerId();
+                $customer = Mage::getModel('customer/customer')->load($customerId);
+                if (!$customer->getFirstname()) {
+                    $customer->setFirstname($billingAddress['firstname']);
+                }
+                if (!$customer->getLastname()) {
+                    $customer->setLastname($billingAddress['lastname']);
+                }
+                $customer->save();
+            }
+            if (!$this->getRequest()->getParam('partner_location') && !$cart->getQuote()->hasProductId(5323)) {
+                Mage::throwException($this->__('Пожалуйста, выберите адрес.'));
+            }
+
+            // customer billing phone
+            if (!empty($billingAddress['telephone']) && empty($shippingAddress['method'])) {
+
+                $customerId = Mage::getSingleton('customer/session')->getCustomerId();
+                // customer address data	    
+                $_custom_address = array(
+                    'telephone' => $billingAddress['telephone'],
+                    'suffix' => 'true'
+                );
+
+                // get address id
+                $customAddress = Mage::getModel('customer/address')->getCollection();
+                $customAddress->getSelect()
+                        ->where('parent_id = ?', $customerId);
+
+                $addrId = '';
+                foreach ($customAddress as $item) {
+                    $addrId = $item->getId();
+                }
+
+                if (!empty($addrId)) {
+                    $_address_model = Mage::getModel('customer/address')->load($addrId);
+
+                    $_address_model->addData($_custom_address)
+                            ->save();
+                } else {
+                    $_address_model = Mage::getModel('customer/address');
+                    $_address_model->setData($_custom_address)
+                            ->setCustomerId($customerId)
+                            ->save();
+                }
+            }
+            
+            // billing save
+            $billing = $checkout->saveBilling($billingAddress, false);
+            
+            // save shipping method
+            if ($shippingAddress['method']) {
+                $checkout->saveShippingMethod($shippingAddress['method']);
+            }
+            
+            // save shipping inventory num
+            if ($shippingAddress['inventory']) {
+                $shippingInv = array('company' => $shippingAddress['inventory']);
+                $checkout->saveShipping($shippingInv, false);
+            }
+            
+            
+            //STEP(6)
+            $checkout->saveOrder();
+            
+            $storeId = Mage::app()->getStore()->getId();
+            $paymentHelper = Mage::helper("payment");
+            $zeroSubTotalPaymentAction = $paymentHelper->getZeroSubTotalPaymentAutomaticInvoice($storeId);
+            if ($paymentHelper->isZeroSubTotal($storeId)
+                    && $this->_getOrder()->getGrandTotal() == 0
+                    && $zeroSubTotalPaymentAction == Mage_Payment_Model_Method_Abstract::ACTION_AUTHORIZE_CAPTURE
+                    && $paymentHelper->getZeroSubTotalOrderStatus($storeId) == 'pending') {
+                $invoice = $this->_initInvoice();
+                $invoice->getOrder()->setIsInProcess(true);
+                $invoice->save();
+            }
+        } catch (Mage_Payment_Model_Info_Exception $e) {
+            $message = $e->getMessage();
+            Mage::logException($e);
+            Mage::getSingleton('checkout/session')->addError($this->__($message));
+            $this->_redirect('checkout/cart/', array('_secure' => true));
+            return;
+        } catch (Mage_Core_Exception $e) {
+            Mage::logException($e);
+            $message = $e->getMessage();
+            Mage::getSingleton('checkout/session')->addError($this->__($message));
+            $this->_redirect('checkout/cart/', array('_secure' => true));
+            return;
+        } catch (Exception $e) {
+            Mage::logException($e);
+            $message = $this->__('There was an error processing your order. Please contact us or try again later.');
+            Mage::getSingleton('checkout/session')->addError($this->__($message));
+            $this->_redirect('checkout/cart/', array('_secure' => true));
+            return;
+        }
+
+        $redirectUrl = $this->getOnepage()->getCheckout()->getRedirectUrl();
+        $checkout->getQuote()->save();
+        /**
+         * when there is redirect to third party, we don't want to save order yet.
+         * we will save the order in return action.
+         */
+        
+        try {
+            $order = $this->_getOrder();
+
+            if (Mage::getConfig()->getModuleConfig('SuperDeal_Friendgift')->is('active')) {
+                if (!empty($order)) {
+                    $total_qty_ordered = $this->_getOrder()->getTotalQtyOrdered();
+                    Mage::dispatchEvent('save_order_friend_gift', array('order' => $order, 'total_qty_ordered' => (int) $total_qty_ordered, 'request' => $this->getRequest()->getPost()));
+                }
+            }
+        } catch (Exception $e) {
+            Mage::logException($e);
+        }
+        
+        if (isset($redirectUrl)) {
+            $this->_redirectUrl($redirectUrl);
+        }
+        
+       	$end_time = microtime(true);
+	$elapsed_time = sprintf("%0.6f", ($end_time - $start_time));
+        $now = Zend_Date::now()
+                ->setTimezone('Europe/Kiev')
+                ->toString(Varien_Date::DATETIME_INTERNAL_FORMAT);
+        $file = fopen('var/save_order_test.txt', 'a+');
+        fwrite($file, "\n$now. Completed order in $elapsed_time seconds.");
+        fclose($file);
+    }
+
+    public function reOrderAction() {
+        $orderId = $this->getRequest()->getParam('order_id');
+        $payment = $this->getRequest()->getParam('payment');
+        if(!empty($orderId) && !empty($payment)) {
+            Mage::getSingleton('checkout/session')->setData('orderId', $orderId);
+            Mage::getSingleton('checkout/session')->setData('payment', $payment['method']);
+            Mage::getModel('sdc/onepage')->setReorderMethod($orderId, $payment['method']);
+            $redirectUrl = Mage::getModel('sdc/onepage')->reOrderRedirectUrl($payment['method']);
+            if (isset($redirectUrl)) {
+                $this->_redirectUrl($redirectUrl);
+            }
+        }
+    }
+    
+    /**
+     * save shipping address
+     */
+    public function saveShippingAction() 
+    {
+        $shippingDefault = array(
+                'address_id' => '',
+                'company' => '',
+                'postcode' => '31000',
+                'country_id' => 'UA',
+                'fax' => '',
+                'customer_password' => '',
+                'save_in_address_book' => ''
+            );
+        
+        $shippingAddress = $this->getRequest()->getParam('shipping') ? $this->getRequest()->getParam('shipping') : array();
+        $shippingAddress = array_merge($shippingAddress, $shippingDefault);
+        
+        $checkout = Mage::getSingleton('checkout/type_onepage');
+        $result = $checkout->saveShipping($shippingAddress, false);
+        
+        // save shipping address in address book customer
+        if ($this->getRequest()->getParam('is_new_shipping') == 'true') {
+          if (count(Mage::helper('customer/address')->getShippingData()) <= 10) {  
+            Mage::getModel('customer/address')->setAddress(Mage::getSingleton('customer/session')->getCustomer()->getId(), $shippingAddress);
+          }  
+        } elseif($this->getRequest()->getParam('address_id')) {
+            Mage::getModel('customer/address')->setAddress(Mage::getSingleton('customer/session')->getCustomer()->getId(), $shippingAddress, $this->getRequest()->getParam('address_id'));
+        }
+        
+        // rate shipping
+        count($result) == 0 ? die(json_encode('success')) : die(json_encode('fail'));
+    }
+
+}

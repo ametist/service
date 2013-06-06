@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/code/local/Enterprise/Reward/etc
+END
+config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/code/local/Enterprise/Reward/etc/config.xml
+END
+logging.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/code/local/Enterprise/Reward/etc/logging.xml
+END
+adminhtml.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/code/local/Enterprise/Reward/etc/adminhtml.xml
+END
+system.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/sdm/!svn/ver/6391/branches/SD-329/app/code/local/Enterprise/Reward/etc/system.xml
+END

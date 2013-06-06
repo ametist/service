@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <free_payment_error>
+        <reference name="content">
+            <block type="free/instructions" name="free.payment.instructions" template="free/error.phtml"/>
+        </reference>
+    </free_payment_error>
+    <free_payment_success>
+        <reference name="content">
+            <block type="free/instructions" name="free.payment.instructions" template="free/success.phtml"/>
+        </reference>
+    </free_payment_success>  
+    <free_payment_help>
+        <reference name="content">
+            <block type="free/instructions" name="free.payment.help" template="free/help.phtml"/>
+        </reference>
+    </free_payment_help>    
+</layout>

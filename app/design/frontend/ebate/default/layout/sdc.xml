@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <checkout_cart_index>
+        <!--<update handle="checkout_cart_index"/>-->
+        <remove name="left"/>
+        <!-- Mage_Checkout -->
+        <reference name="head">
+            <action method="addJs"><script>ui/jquery.ui.core.js</script></action>
+            <action method="addJs"><script>ui/jquery.ui.widget.js</script></action>
+            <action method="addJs"><script>ui/jquery.ui.mouse.js</script></action>
+            <action method="addJs"><script>ui/jquery.ui.button.js</script></action>
+            <action method="addJs"><script>ui/jquery.ui.draggable.js</script></action>
+            <action method="addJs"><script>ui/jquery.ui.position.js</script></action>
+            <action method="addJs"><script>ui/jquery.ui.dialog.js</script></action>
+            <action method="addCss"><stylesheet>css/ui/styles.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/ui/jquery.ui.theme.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/ui/jquery.ui.all.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/ui/jquery.ui.base.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/ui/jquery.ui.button.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/ui/jquery.ui.core.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/ui/jquery.ui.dialog.css</stylesheet></action>
+<!--            <action method="addItem"><type>skin_js</type><name>js/modal-conformation.js</name></action>-->
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <remove name="checkout.cart.top_methods"/>
+        <!-- ascroller remove -->
+        <remove name="ascroller"/>
+        <reference name="content">            
+            <block type="checkout/cart" name="sdc.checkout.cart">
+                <action method="setCartTemplate"><value>sdc/cart.phtml</value></action>
+                <action method="setEmptyTemplate"><value>checkout/cart/noItems.phtml</value></action>
+                <action method="chooseTemplate"/>
+                <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/item/default.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/item/default.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/item/default.phtml</template></action>                
+                <block type="checkout/onepage_payment_methods" name="sdc.checkout.payment.methods" as="methods" template="sdc/methods.phtml">
+                    <block type="enterprise_customerbalance/checkout_onepage_payment_additional" template="customerbalance/checkout/onepage/payment/additional.phtml" name="customerbalance" />
+                    <block type="enterprise_reward/checkout_payment_additional" template="reward/checkout/onepage/payment/additional.phtml" name="reward.points" before="-"/>
+                    <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+<!--                    <block type="sdc/agreements" name="sdc.agreements" template="sdc/test.phtml"/>-->
+               </block>
+               <block type="sdc/cart" name="checkout.cart.shipping" as="shipping" template="sdc/shipping.phtml"/>
+               
+               <block type="checkout/onepage_payment_methods" name="checkout.cart.even" as="checkout_cart_even" template="sdc/even.phtml">
+                   <block type="enterprise_customerbalance/checkout_onepage_payment_additional" template="customerbalance/checkout/onepage/payment/additional.phtml" name="customerbalance" />
+                    <block type="enterprise_reward/checkout_payment_additional" template="reward/checkout/onepage/payment/additional.phtml" name="reward.points" before="-"/>
+                    <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+                    <block type="customer/account_dashboard" name="customer_balance" as="customer_balance" template="page/html/customerbalance.phtml" />
+                    <block type="enterprise_reward/customer_reward_info" name="customer_bonuses" as="customer_bonuses" template="page/html/customerbonuses.phtml" />
+               </block>
+               
+               <block type="checkout/onepage_payment_methods" name="checkout.cart.odd" as="checkout_cart_odd" template="sdc/odd.phtml">
+                    <block type="enterprise_customerbalance/checkout_onepage_payment_additional" template="customerbalance/checkout/onepage/payment/additional.phtml" name="customerbalance" />
+                    <block type="enterprise_reward/checkout_payment_additional" template="reward/checkout/onepage/payment/additional.phtml" name="reward.points" before="-"/>
+                    <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+                    <block type="customer/account_dashboard" name="customer_balance" as="customer_balance" template="page/html/customerbalance.phtml" />
+                    <block type="enterprise_reward/customer_reward_info" name="customer_bonuses" as="customer_bonuses" template="page/html/customerbonuses.phtml" />
+               </block>
+               
+            </block>
+        </reference>
+    </checkout_cart_index>
+    
+</layout>

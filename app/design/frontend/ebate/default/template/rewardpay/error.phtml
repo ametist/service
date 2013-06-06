@@ -1,0 +1,18 @@
+<div id="userInfo">  
+    <h1>Ошибка во время покупки.
+    <?php if ((Mage::helper('bonuspay')->getProductType() != "simple") && (Mage::helper('bonuspay')->getProductType() != "configurable")) : ?>    
+     <a href="<?php echo Mage::getUrl('customer/status/reorder') ?>"><img src="<?php echo $this->getSkinUrl('images/Back_btn1.gif'); ?>" class="back-img" /></a>
+    <?php endif; ?>
+    </h1> 
+    <div id="bkgSampleContent">
+        <div style="font-weight: bold">
+            <p>Произошел технический сбой, и ваш заказ не был оплачен.</p>
+            <p>Попробуйте оплатить заказ еще раз. Или же свяжитесь с нами для разьяснения ситуации.</p>
+        </div>
+        <br /><br />
+        <?php if ((Mage::helper('bonuspay')->getProductType() != "simple") && (Mage::helper('bonuspay')->getProductType() != "configurable")) : ?>    
+        <a href="<?php echo Mage::getUrl('customer/status/reorder') ?>"><img src="<?php echo $this->getSkinUrl('images/Back_btn3.gif'); ?>"/></a>
+        <?php endif; ?>
+    </div>
+    
+</div>

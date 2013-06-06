@@ -1,0 +1,10 @@
+2013-05-30T19:56:27+00:00 ERR (3): Warning: simplexml_load_string() [<a href='function.simplexml-load-string'>function.simplexml-load-string</a>]: Entity: line 172: parser error : Comment not terminated 
+&lt;!--&lt;sales_quote_merge_after&gt;
+                &lt;observe  in Z:\home\service\www\lib\Varien\Simplexml\Config.php on line 510
+2013-05-30T19:56:27+00:00 ERR (3): Warning: simplexml_load_string() [<a href='function.simplexml-load-string'>function.simplexml-load-string</a>]:             &lt;!--&lt;sales_order_invoice_save_after&gt;  in Z:\home\service\www\lib\Varien\Simplexml\Config.php on line 510
+2013-05-30T19:56:27+00:00 ERR (3): Warning: simplexml_load_string() [<a href='function.simplexml-load-string'>function.simplexml-load-string</a>]:               ^  in Z:\home\service\www\lib\Varien\Simplexml\Config.php on line 510
+2013-05-30T19:56:34+00:00 ERR (3): Warning: simplexml_load_string() [<a href='function.simplexml-load-string'>function.simplexml-load-string</a>]: Entity: line 172: parser error : Comment not terminated 
+&lt;!--&lt;sales_quote_merge_after&gt;
+                &lt;observe  in Z:\home\service\www\lib\Varien\Simplexml\Config.php on line 510
+2013-05-30T19:56:34+00:00 ERR (3): Warning: simplexml_load_string() [<a href='function.simplexml-load-string'>function.simplexml-load-string</a>]:             &lt;!--&lt;sales_order_invoice_save_after&gt;  in Z:\home\service\www\lib\Varien\Simplexml\Config.php on line 510
+2013-05-30T19:56:34+00:00 ERR (3): Warning: simplexml_load_string() [<a href='function.simplexml-load-string'>function.simplexml-load-string</a>]:               ^  in Z:\home\service\www\lib\Varien\Simplexml\Config.php on line 510
