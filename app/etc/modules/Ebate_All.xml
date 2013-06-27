@@ -21,5 +21,9 @@
                 <Mage_Payment/>
             </depends>
         </Ebate_Free>
+        <Ebate_Parser>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Ebate_Parser>
     </modules>
 </config>
