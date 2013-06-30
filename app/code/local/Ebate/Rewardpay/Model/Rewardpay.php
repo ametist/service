@@ -87,12 +87,24 @@ class Ebate_Rewardpay_Model_Rewardpay extends Mage_Payment_Model_Method_Abstract
                 ->setWebsiteId($websiteId)
                 ->loadByCustomer()
                 ->getPointsBalance();
-         if($quote->hasProductId(362) || $quote->hasProductId(5323)){
-            return false;
-        }elseif($reward < $quote->getGrandTotal()){
+
+        if($reward < $quote->getGrandTotal()){
             return false;
         }    
         return true;
+    }
+
+    public function addCustomerBonuses($order, $cashback)
+    {
+        $websiteId = Mage::app()->getStore($order->getStoreId())->getWebsiteId();
+            $balance = Mage::getModel('enterprise_customerbalance/balance')
+                ->setCustomerId($order->getCustomerId())
+                ->setWebsiteId(1)
+                ->setAmountDelta($cashback)
+                ->setHistoryAction(Enterprise_CustomerBalance_Model_Balance_History::ACTION_USED)
+                #->addStatusToHistory('cashback')
+                ->setOrder($order)
+                ->save();
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-class SuperDeal_Parser_Adminhtml_OffersController extends Mage_Adminhtml_Controller_Action {
+class Ebate_Parser_Adminhtml_OffersController extends Mage_Adminhtml_Controller_Action {
     
     protected $dir;
 
