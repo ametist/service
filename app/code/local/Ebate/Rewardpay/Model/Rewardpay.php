@@ -96,15 +96,14 @@ class Ebate_Rewardpay_Model_Rewardpay extends Mage_Payment_Model_Method_Abstract
 
     public function addCustomerBonuses($order, $cashback)
     {
-        $websiteId = Mage::app()->getStore($order->getStoreId())->getWebsiteId();
-            $balance = Mage::getModel('enterprise_customerbalance/balance')
+        $reward = Mage::getModel('enterprise_reward/reward')
                 ->setCustomerId($order->getCustomerId())
-                ->setWebsiteId(1)
-                ->setAmountDelta($cashback)
-                ->setHistoryAction(Enterprise_CustomerBalance_Model_Balance_History::ACTION_USED)
-                #->addStatusToHistory('cashback')
-                ->setOrder($order)
-                ->save();
+                ->setWebsiteId(Mage::app()->getStore($order->getStoreId())->getWebsiteId())
+                ->setPointsDelta($cashback)
+                ->setAction(Enterprise_Reward_Model_Reward::REWARD_ACTION_ORDER)
+                ->setActionEntity($order)
+                #->setComment('cashback')
+                ->updateRewardPoints();     
     }
 
 }

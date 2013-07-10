@@ -3,15 +3,11 @@
 class Ebate_Parser_Adminhtml_OrdersController extends Mage_Adminhtml_Controller_Action {
     
     const FILENAME = 'groupon.csv';
+    const SALT = 'flowers';
    
     protected $dir;
 
     public function indexAction() { 
-
-        # test
-        $order = Mage::getModel('sales/order')->load(41);
-        Mage::getModel('rewardpay/rewardpay')->addCustomerBonuses($order, 10); die();
-        # test
 
 	// oid;cashback_sum;
         $this->_dir = Mage::getBaseDir('var') . DS . 'parser/orders';
@@ -22,20 +18,19 @@ class Ebate_Parser_Adminhtml_OrdersController extends Mage_Adminhtml_Controller_
             $num = count($data);
             $row++;
             for ($c=0; $c < $num; $c++) {
-                echo $data[$c] . "<br />\n";
-
+                $res = explode(";", $data[$c]);
+                $order_id = (int) Mage::helper('core')->decrypt(array_shift($res));
+                $cashback = array_pop($res);
                 // get order data 
 
                 // add cashback to rewardpoints
-                #Mage::getModel('rewardpay/rewardpay')->addCustomerBonuses(41, 10);
+                if ($order_id > 0) {
+                  $order = Mage::getModel('sales/order')->load($order_id);
+                  Mage::getModel('rewardpay/rewardpay')->addCustomerBonuses($order, $cashback * 0.5);
+                }
             }
           }
           fclose($handle);
         }
     }
-
-    public function getOrderData() {}
-
-
-    
 }

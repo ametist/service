@@ -36,28 +36,22 @@
     </admin>
     <adminhtml>
         <menu>
-            <parser_offers module="parser">
-                <title>Parser offers</title>
-                <sort_order>1</sort_order>               
-                <children>
-                    <items module="parser">
+          <parsers module="parser">  
+            <title>Partner parsers</title>
+            <sort_order>71</sort_order>
+            <children>
+                    <parser_offers module="parser">
                         <title>Parser offers</title>
                         <sort_order>0</sort_order>
                         <action>parser/adminhtml_offers</action>
-                    </items>
-                </children>
-            </parser_offers>
-            <parser_orders module="parser">
-                <title>Parser orders</title>
-                <sort_order>2</sort_order>               
-                <children>
-                    <items module="parser">
+                    </parser_offers>
+                    <parser_orders module="parser">
                         <title>Parser orders</title>
                         <sort_order>0</sort_order>
                         <action>parser/adminhtml_orders</action>
-                    </items>
-                </children>
-            </parser_orders>
+                    </parser_orders>
+            </children>
+           </parsers> 
         </menu>
         <acl>
             <resources>
