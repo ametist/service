@@ -26,7 +26,15 @@ class Ebate_Parser_Adminhtml_OrdersController extends Mage_Adminhtml_Controller_
                 // add cashback to rewardpoints
                 if ($order_id > 0) {
                   $order = Mage::getModel('sales/order')->load($order_id);
-                  Mage::getModel('rewardpay/rewardpay')->addCustomerBonuses($order, $cashback * 0.5);
+                  if ($order->getStatus() != "complete") {
+                     Mage::getModel('rewardpay/rewardpay')->addCustomerBonuses($order, $cashback * 0.5);
+
+                     $order->setData('state', "complete");
+                     $order->setStatus("complete");
+                     $history = $order->addStatusHistoryComment('Order was set to Complete by our automation tool.', false);
+                     $history->setIsCustomerNotified(false);
+                     $order->save();
+                  }
                 }
             }
           }

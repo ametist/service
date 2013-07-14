@@ -1,9 +1,0 @@
-K 13
-svn:mergeinfo
-V 385
-/branches/SD-253/app/code/community/SD/SDCheckout/etc/config.xml:5954-5958
-/branches/ametist/app/code/community/SD/Bank/etc/config.xml:4647-5944
-/branches/ametist/app/code/community/SD/SDCheckout/Helper/etc/config.xml:4647-6183
-/branches/ametist/app/code/community/SD/SDCheckout/Model/etc/config.xml:4647-5944
-/branches/ametist/app/code/community/SD/SDCheckout/etc/config.xml:4647-5967
-END

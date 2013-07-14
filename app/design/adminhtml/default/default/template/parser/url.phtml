@@ -1,0 +1,6 @@
+<form action="<?php echo Mage::helper("adminhtml")->getUrl("parser/adminhtml_offers/parse") ?>" method="POST" />
+	<label>Укажите адресс для парсера акций: </label><br />
+	<input type="text" name="parse_url" size="50px">
+	<input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+	<input type="submit" value="Запустить">
+</form>

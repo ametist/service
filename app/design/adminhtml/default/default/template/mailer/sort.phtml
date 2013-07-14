@@ -1,0 +1,165 @@
+<script type="text/javascript">
+    
+jQuery(document).ready(function(){
+        
+    jQuery('#city').change(function(){
+        var cityId = jQuery(this).val();
+        location.href = '/index.php/admin/mailersoft/adminhtml_mailer/sort/city/' + cityId;
+    });
+
+    // jQuery( "ul.droptrue" ).sortable({
+    //     connectWith: "ul",
+    //     cursor: "move",
+    //     opacity: 0.6,
+    //     stop: function(event, ui) {
+    //         ui.item.find('.action_position').attr('value', ui.item.index()+1);
+    //     }
+    // });
+    // jQuery( "#sortable_first, #sortable_second" ).disableSelection();
+    
+
+    jQuery( "tbody.droptrue" ).sortable({
+        connectWith: "tbody",
+        handle:'td:first',
+        cursor: "move",
+        opacity: 0.6,
+        revert: true,
+        stop: function(event, ui) {
+            ui.item.find('.action_position').attr('value', ui.item.index());
+        }
+    });
+    jQuery( "#sortable_first, #sortable_second" ).disableSelection();
+
+
+});
+    
+</script>
+
+<?php 
+
+    $cityId = Mage::app()->getRequest()->getParam('city');
+    $cities = Mage::getModel('mailer/mailersoft')->getCities(); 
+    
+    if(!isset($cityId))
+        $cityId = 0;
+    else
+        $products = Mage::getModel('mailer/mailersoft')->prepareData($cityId);
+
+?>
+
+<h1>Сортировка акций MailerSoft 12</h1>
+
+<?php if(Mage::registry('clear')): ?><b>Акции обнулены</b><br /><br /><?php endif; ?>
+
+<form action="" method="POST" autocomplete="off">
+    <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+    <fieldset class="custom-fieldset">
+        <legend class="custom-legend">Обнуление</legend>
+        <b>Обнулить сохраненные акции </b><br/>
+        <input type="submit" value="Обнулить акции" name="clearLog" class="admbutton" /><br />
+    </fieldset>
+</form>
+<br /><br /> 
+
+<fieldset class="custom-fieldset">
+    <legend class="custom-legend">Генерация xml</legend>
+    <b>Сгенерировать Mailer Soft 12 </b><br/><br />
+    <button onclick="location.href='<?php echo Mage::getUrl('xmlexport/adminhtml_exportms12/sortMailersoft') ?>'">Сгенерировать</button>
+</fieldset>
+<br /><br />    
+
+<fieldset class="custom-fieldset">
+    <legend class="custom-legend">Города</legend>   
+    
+        <label><b>Выберите город:</b></label>
+        <br />
+        <select name="city" id="city" style="width: 200px;">
+            <option value="0">Выберите город</option>
+            <?php foreach($cities as $city): ?>
+                <option value="<?php echo $city->getGroupId() ?>" <?php if($city->getGroupId() == $cityId): ?> selected="selected" <?php endif; ?>><?php echo $city->getName() ?></option>
+            <?php endforeach; ?>
+        </select>
+        
+</fieldset>
+
+
+<br /><br />    
+
+<?php if($cityId != 0): ?>
+
+<!--       <fieldset class="product-fieldset">
+        <legend class="custom-legend">Акции</legend>
+        <b>Список акций: </b><hr /><br/>   
+        <div class="actions_left">
+            <table class="mailer_titles" width="100%">    
+                <tr><td>№ акции</td><td>Название акции</td></tr>
+            </table>
+            <form action="" method="POST" autocomplete="off">
+                <ul id="sortable_first" class="send_data droptrue">
+                    <?php foreach($products as $product): ?>
+                        <li><span title="потяните за номер" class="action_num"><?php echo $product['id']; ?></span><span><input type="text" class="action_name" name="mailer[<?php echo $product['id']?>][title]" value="<?php echo $product['tempTitle']; ?>"/></span><input class="position" type="hidden" name="position" /></li>
+                    <?php endforeach; ?> 
+                </ul>
+            </form>
+        </div>
+        <div class="actions_right">
+            <table class="mailer_titles" width="100%">    
+                <tr><td>№ акции</td><td>Название акции на рассылку</td></tr>
+            </table>
+            <form action="" method="POST" autocomplete="off">
+                <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" /> 
+                <input name="cityId" type="hidden" value="<?php echo $cityId; ?>" />
+                <ul id="sortable_second" class="nosend_data droptrue"></ul>
+                <input type="submit" value="Сохранить" name="savePosition" class="admbutton" />
+           </form>
+        </div>
+        <br style="clear:both;"/>
+    </fieldset>
+<br /><br />  -->
+
+<?php endif; ?>
+   
+
+<?php if($cityId != 0): ?>
+
+     
+      <fieldset class="product-fieldset">
+        <legend class="custom-legend">Акции</legend>
+        <b>Список акций: </b><hr /><br/>
+        <table class="tabl_left" width="45%" cellpadding="9">    
+            <thead>
+                <tr><th>№ акции</th><th>Название акции</th></tr>
+            </thead>
+            <tbody class="tab_body_first droptrue" style="height: 50px;">
+                <tr></tr>
+                <?php foreach($products as $product): ?>
+                    <tr>
+                        <td style="width: 10%;" class="mailer_ticket"><span><a href="<?php echo $product['link']; ?>" target="_blank"><?php echo $product['id']; ?></a></span></td>
+                        <td style="width: 90%;">
+                            <span>
+                                <input type="text" name="mailer[<?php echo $product['id']  ?>][title]" value='<?php echo $product['title']; ?>' style="width: 97%;">
+                            </span>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>    
+        </table>
+         <form action="" method="POST" autocomplete="off">
+            <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" /> 
+            <input name="cityId" type="hidden" value="<?php echo $cityId; ?>" />
+            <table class="tabl_right" width="45%" cellpadding="9">    
+                <thead>
+                    <tr><th>№ акции</th><th>Название акции для рассылки</th></tr>
+                </thead>
+                <tbody class="tab_body_second droptrue" style="height: 50px;">
+                    <tr></tr> 
+                </tbody>    
+            </table>
+            <!-- <br style="clear:both;"/> -->
+            <input type="submit" value="Сохранить" name="savePosition" class="admbutton" />
+        </form>
+        <br /><br />
+    </fieldset>
+
+
+<?php endif; ?>

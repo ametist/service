@@ -25,5 +25,9 @@
             <active>true</active>
             <codePool>local</codePool>
         </Ebate_Parser>
+        <Ebate_Mailersoft>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Ebate_Mailersoft>
     </modules>
 </config>

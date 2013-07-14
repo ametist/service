@@ -1,0 +1,32 @@
+<?php $mailersoft_groups = $this->getMailersoftGroups()?>
+<div class="content-header">
+    <table cellspacing="0" class="grid-header">
+        <tr>
+            <td><h3><?php echo $this->__('Set Mailersoft Groups Ids By City')?></h3></td>
+            <td class="a-right">
+                <button onclick="editForm.submit()" class="scalable save" type="button"><span>Submit</span></button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="entry-edit">
+    <form id="edit_form" name="edit_form" method="post" action="<?php echo $this->getUrl('*/*/post')?>">
+        <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Mailersoft groups table')?></h4>
+        <fieldset id="my-fieldset">
+            <table cellspacing="0" class="form-list">
+                <tr><th>City Name</th><th>Mailersoft group id</th></tr>
+                <?php foreach($this->getGroups() as $group):?>
+                <tr>
+                    <td class="label"><?php echo $group->getName()?> <span class="required">*</span></td>
+                    <td class="input-ele"><input class="input-text required-entry" name="mailer[group_<?php echo $group->getId()?>]" value="<?php echo $mailersoft_groups['group_' . $group->getId()]?>"/></td>
+                </tr>
+                <?php endforeach?>
+            </table>
+        </fieldset>
+    </form>
+</div>
+<script type="text/javascript">
+    var editForm = new varienForm('edit_form');
+</script>
+

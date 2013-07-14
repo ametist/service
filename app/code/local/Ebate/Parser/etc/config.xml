@@ -33,6 +33,13 @@
                 </args>
             </parser>
         </routers>
+        <layout>
+                <updates>
+                    <parser>
+                        <file>parser.xml</file>
+                    </parser>
+                </updates>
+        </layout>
     </admin>
     <adminhtml>
         <menu>
@@ -85,11 +92,11 @@
             </resources>   
         </acl>
         <layout>
-            <updates>
-                <parser>
-                    <file>parser.xml</file>
-                </parser>
-            </updates>
+                <updates>
+                    <parser>
+                        <file>parser.xml</file>
+                    </parser>
+                </updates>
         </layout>
         <translate>
             <modules>

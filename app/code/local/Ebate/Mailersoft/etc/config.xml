@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ebate_Mailersoft>
+            <version>0.2.0</version>
+        </Ebate_Mailersoft>
+    </modules>
+    <frontend/>
+    <admin>
+        <routers>
+            <mailer>
+                <use>admin</use>
+                <args>
+                    <module>Ebate_Mailersoft</module>
+                    <frontName>mailersoft</frontName>
+                </args>
+            </mailer>
+        </routers>
+    </admin>
+    <adminhtml>
+        <menu>
+            <mailer module="mailer">
+                <title>Mailersoft</title>
+                <sort_order>71</sort_order>               
+                <children>
+                    <settings module="mailer">
+                        <title>Manage Settings</title>
+                        <sort_order>0</sort_order>
+                        <action>mailer/adminhtml_mailer/settings</action>
+                    </settings>
+                    <export module="mailer">
+                        <title>Export</title>
+                        <sort_order>1</sort_order>
+                        <action>mailer/adminhtml_mailer/export</action>
+                    </export>
+                    <reports module="mailer">
+                        <title>Export Reports</title>
+                        <sort_order>2</sort_order>
+                        <action>mailer/adminhtml_mailer/reports</action>
+                    </reports>
+                    <sorts module="mailer">
+                        <title>Сортировка акций</title>
+                        <sort_order>3</sort_order>
+                        <action>mailer/adminhtml_mailer/sort</action>
+                    </sorts>
+                </children>
+            </mailer>
+        </menu>
+        
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <mailer translate="title">
+			<title>Mailersoft</title>
+			<sort_order>71</sort_order>
+			<children>
+                        
+                        <settings translate="title">
+                            <title>Manage Settings</title>
+                            <sort_order>1</sort_order>
+                        </settings>
+                        <export translate="title">
+                            <title>Export</title>
+                            <sort_order>2</sort_order>
+                        </export>
+                        <reports translate="title">
+                            <title>Export Reports</title>
+                            <sort_order>3</sort_order>
+                        </reports>
+                        <sorts translate="title">
+                            <title>Sorts</title>
+                            <sort_order>4</sort_order>
+                        </sorts>
+                        </children>
+		    </mailer>
+                    </children>
+                </admin>
+            </resources>   
+        </acl>
+        
+        <layout>
+            <updates>
+                <mailer>
+                    <file>mailer.xml</file>
+                </mailer>
+            </updates>
+        </layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <mailer>
+                <class>Ebate_Mailersoft_Model</class>
+                <resourceModel>mailersoft_mysql4</resourceModel>
+            </mailer>
+            <mailersoft_mysql4>
+		<class>Ebate_Mailersoft_Model_Mysql4</class>
+		<entities>
+		    <mailersoft>
+			<table>mycash_mailersoft</table>
+		    </mailersoft>
+		</entities>
+	    </mailersoft_mysql4>
+        </models>
+        <resources>
+	    <mailersoft_setup>
+		<setup>
+		    <module>Ebate_Mailersoft</module>
+		</setup>
+		<connection>
+		    <use>core_setup</use>
+		</connection>
+	    </mailersoft_setup>
+	    <mailersoft_write>
+		<connection>
+		    <use>core_write</use>
+		</connection>
+	    </mailersoft_write>
+	    <mailersoft_read>
+		<connection>
+		    <use>core_read</use>
+		</connection>
+	    </mailersoft_read>
+	</resources>
+        <blocks>
+            <mailer>
+                <class>Ebate_Mailersoft_Block</class>
+            </mailer>
+        </blocks>
+        <helpers>
+            <mailer>
+                <class>Ebate_Mailersoft_Helper</class>
+            </mailer>
+        </helpers>
+        <events>
+          <customer_save_after>
+            <observers>
+              <ebate_mailersoft>
+                <type>singleton</type>
+                <class>Ebate_Mailersoft_Model_Observer</class>
+                <method>updateSubscriber</method>
+              </ebate_mailersoft>
+            </observers>
+          </customer_save_after>
+        </events>
+    </global>
+    <default>
+        <mailer>
+            <mailer_general>
+                <enabled>1</enabled>
+                <wsdl>http://www.mailersoft.com/soapserver.php?wsdl</wsdl>
+                <api_key>API_KEY</api_key>
+                <log>1</log>
+            </mailer_general>
+        </mailer>
+    </default>
+</config>

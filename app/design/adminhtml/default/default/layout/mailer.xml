@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <mailersoft_adminhtml_mailer_index>
+        <reference name="content">
+            <block type="core/template" name="mailer" output="toHtml" template="mailer/mailer.phtml"/>
+        </reference>
+    </mailersoft_adminhtml_mailer_index>
+    <mailersoft_adminhtml_mailer_export>
+        <reference name="content">
+            <block type="core/template" name="mailer_export" template="mailer/mailer.phtml"/>
+        </reference>
+    </mailersoft_adminhtml_mailer_export>
+</layout>

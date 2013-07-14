@@ -2,29 +2,33 @@
 
 class Ebate_Parser_Adminhtml_OffersController extends Mage_Adminhtml_Controller_Action {
     
-    protected $dir;
+
+    public function indexAction() {
+        $this->loadLayout();
+        $this->renderLayout();
+    }
+
+    //'http://www.superdeal.com.ua/output_xml/skidochnik.xml';
     
-    public function indexAction() { 
+    public function parseAction() { 
 	    
-        $data = 'http://www.superdeal.com.ua/output_xml/skidochnik.xml';
+        $data = $this->_request->getParam('parse_url'); 
         $xml = new Zend_Config_Xml($data);
         $offers = $xml->toArray();
         $url = $offers['operator']['url'];
 
         foreach ($offers['offers']['offer'] as $offer) {
-            $this->createOffer($offer, $url); die();
+            $this->createOffer($offer, $url);
         }
     }
     
     public function createOffer($data, $url)
     {
-
         $newproduct = new Mage_Catalog_Model_Product();
 
         $newproduct->setTypeId('simple');
-        #$newproduct->setWeight($product->UnitWeight);       
         $newproduct->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH); 
-        $newproduct->setStatus(0);
+        $newproduct->setStatus(2); // disabled
         #$newproduct->setSKU($SKU);
         $newproduct->setTaxClassId(0);
         $newproduct->setWebsiteIDs(array(0)); 
@@ -37,15 +41,16 @@ class Ebate_Parser_Adminhtml_OffersController extends Mage_Adminhtml_Controller_
 
         $newproduct->setAttributeSetId(9);
         $newproduct->setName($data['name']);
-        $newproduct->setCategoryIds(array(3)); // array of categories it will relate to
+        $newproduct->setCategoryIds(array(3)); // !!! CATEGORIES
 
         $newproduct->setShortDescription($data['name']);
         $newproduct->setDescription($data['description']);
         $newproduct->setConditions($data['conditions']);
         $newproduct->setPrice($data['price']);
-        $newproduct->setData('real_url', $url);
+        $newproduct->setCashback($data['cashback']);
+        $newproduct->setRealUrl($url);
 
-        #$this->addImage($newproduct, $data['picture']);
+        $this->addImage($newproduct, $data['picture']);
 
         try {
             if (is_array($errors = $newproduct->validate())) {
@@ -64,10 +69,28 @@ class Ebate_Parser_Adminhtml_OffersController extends Mage_Adminhtml_Controller_
         }
   }
 
-  public function addImage($product, $putPathHere)
+  public function addImage($product, $productPath)
   {
-   $product->setMediaGallery (array('images'=>array (), 'values'=>array ()));
-   $product->addImageToMediaGallery ($putPathHere, array ('image', 'small_image', 'thumbnail'), false, false); 
+    $images = array($productPath);
+    for($j=0;$j<count($images);$j++){
+        $image_url = $images[$j]; //get external image url from csv
+                
+        $image_url = str_replace("https://", "http://", $image_url); // repalce https tp http
+        
+        $image_type = substr(strrchr($image_url,"."),1); //find the image extension
+        $filename   = $sku.$j.'.'.$image_type; //give a new name, you can modify as per your requirement
+        $filepath   = Mage::getBaseDir('media') . DS . 'import'. DS . $filename; //path for temp storage folder: ./media/import/
+        file_put_contents($filepath, file_get_contents(trim($image_url))); //store the image from external url to the temp storage folder
+        
+        $filepath_to_image=$filepath;
+        $mediaAttribute = array (
+                'thumbnail',
+                'small_image',
+                'image'
+        );
+
+        $product->addImageToMediaGallery($filepath_to_image, $mediaAttribute, true, false);
+    }
   }
 
 }

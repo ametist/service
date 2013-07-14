@@ -1,0 +1,14 @@
+<fieldset class="custom-fieldset">
+    <legend class="custom-legend">All Reports</legend>
+    <button onclick="location.href='<?php echo Mage::getUrl('mailersoft/index/reports') ?>'">Generate</button>
+</fieldset>
+<br /><br />    
+
+<fieldset class="custom-fieldset">
+    <legend class="custom-legend">Select Report</legend>
+    <form action="<?php echo Mage::getUrl('mailersoft/index/report') ?>" method="POST" name="report">
+        <label><b>Mail ID</b></label>
+        <input type="text" name="mailid" size="10" /><br /><br />
+        <input type="submit" value="Generate" class="form-button" />
+    </form>
+</fieldset>
