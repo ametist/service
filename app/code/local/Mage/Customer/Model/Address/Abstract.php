@@ -356,7 +356,7 @@ class Mage_Customer_Model_Address_Abstract extends Mage_Core_Model_Abstract
     {
         $errors = array();
         $this->implodeStreetAddress();
-        if (!Zend_Validate::is($this->getFirstname(), 'NotEmpty')) {
+        /*if (!Zend_Validate::is($this->getFirstname(), 'NotEmpty')) {
             $errors[] = Mage::helper('customer')->__('Please enter the first name.');
         }
 
@@ -392,7 +392,7 @@ class Mage_Customer_Model_Address_Abstract extends Mage_Core_Model_Abstract
                && Mage::helper('directory')->isRegionRequired($this->getCountryId())
         ) {
             $errors[] = Mage::helper('customer')->__('Please enter the state/province.');
-        }
+        }*/
 
         if (empty($errors) || $this->getShouldIgnoreValidation()) {
             return true;
