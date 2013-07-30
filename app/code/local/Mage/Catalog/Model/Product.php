@@ -47,6 +47,7 @@ class Mage_Catalog_Model_Product extends Mage_Catalog_Model_Abstract
     protected $_eventPrefix      = 'catalog_product';
     protected $_eventObject      = 'product';
     protected $_canAffectOptions = false;
+    const SALT = 'flowers';
 
     /**
      * Product type instance
@@ -2056,5 +2057,30 @@ class Mage_Catalog_Model_Product extends Mage_Catalog_Model_Abstract
     public function isDisabled()
     {
         return $this->getStatus() == Mage_Catalog_Model_Product_Status::STATUS_DISABLED;
+    }
+
+    /**
+    * get real url by category
+    **/
+    public function getRealUrlByCategory($category_id)
+    {
+        $customer_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
+        if ($customer_id) {
+            $category = new Mage_Catalog_Model_Category();
+            $category->load($category_id); 
+
+            $prodCollection = $category->getProductCollection();
+            
+            foreach ($prodCollection as $product) {
+                $prdIds[] = $product->getId(); 
+            }
+
+            if (count($prdIds) > 0) {
+                $product_id = $prdIds[0];
+                $real_url = Mage::getModel('catalog/product')->load($product_id)->getData('real_url');
+                $hash = Mage::helper('core')->encrypt('ctg_' . $customer_id . self::SALT);
+                return $real_url . '?oid=' . $hash;
+            }
+        }
     }
 }
