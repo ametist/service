@@ -1,0 +1,95 @@
+/* The slider */
+#iview {
+  display: block;
+  max-width: 1010px;
+  min-width: 425px;
+  position: relative;
+  overflow: hidden;
+}
+  #iview .iviewSlider {
+    display: block;
+    width: 1010px;
+    height: 425px;
+    overflow: hidden;
+  }
+
+
+
+/* The timer in the Slider */
+#iview-timer,
+#iview-preloader,
+.iview-directionNav,
+.iview-tooltip,
+.iview-controlPrevNav,
+.iview-controlNextNav {
+  display: none !important;
+}
+
+/* The strips and boxes in the Slider */
+.iview-strip {
+  display:block;
+  position:absolute;
+  z-index:5;
+}
+.iview-block {
+  display:block;
+  position:absolute;
+  z-index:5;
+}
+
+/* Control nav styles (e.g. 1,2,3...) */
+.iview-controlNav {
+  position:absolute;
+  bottom: 10px;
+  left: -160px;
+  z-index:9;
+  opacity: 1;
+  width: 100%;
+}
+
+.iview-controlNav .iview-items ul {
+  list-style: none;
+  text-align: center;
+}
+.iview-controlNav .iview-items ul li {
+  display: inline-block;
+  position: relative;
+}
+
+
+.iview-controlNav a {
+  font: 0/0 Serif;
+  display: inline-block;
+  text-decoration: none;
+  padding: 5px;
+  margin: 0 5px;
+  outline: 0;
+  background-color: #789e3f;
+  border: solid 1px #000;
+  border-radius: 50%;
+  color: #789e3f;
+  cursor:pointer;
+}
+.iview-controlNav a.active {
+  background-color: #f68d1e;
+  color: #f68d1e;
+}
+
+/* The captions in the Slider */
+.iview-caption {
+  position:absolute;
+  z-index:4;
+  overflow: hidden;
+  cursor: default;
+  width: 265px;
+  height: 100%;
+  padding: 15px 20px;
+  background-color: #779d3e;
+  color: #fff;
+  overflow: hidden;
+}
+
+.caption-contain {
+  top: 0 !important;
+  left: 0 !important;
+}

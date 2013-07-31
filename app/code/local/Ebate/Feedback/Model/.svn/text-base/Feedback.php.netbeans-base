@@ -1,0 +1,38 @@
+<?php
+
+class SuperDeal_Feedback_Model_Feedback extends Mage_Core_Model_Abstract
+{
+    
+    const SEND_MAIL = 'cc@superdeal.com.ua';
+
+    public function sendLetter($data)
+    {
+        
+            // Subject + Tracker
+            $subject = array(1 => 'Проблема с авторизацией на сайте',
+                             2 => 'Вопросы по условиям акции',
+                             3 => 'Сложности с оформлением заказа',
+                             4 => 'Проблемы с получением купона',
+                             5 => 'Сложности с оплатой купона',   
+                             6 => 'Проблемы с реализацией купона',
+                             7 => 'Запрос на возврат');
+            
+            if(isset($data['number']) AND !empty($data['number'])) 
+                $num = " №: ".$data['number'];
+            else
+                $num = '';
+            
+            $title = $subject[$data['typeQuery']].$num;
+            
+            $body  = "Имя клиента: ".$data['name'].PHP_EOL.
+                     "E-mail: ".$data['email']    .PHP_EOL.
+                     $data['comment']             .PHP_EOL;
+                     //"Project: sd_support"        .PHP_EOL.
+                     //"Tracker: ".$subject[$data['typeQuery']];
+            
+            Mage::helper('landing/data')->sendLetter(self::SEND_MAIL, $body, 'text', $title, null, null, $data['email'], $data['name']);
+            
+            Mage::getSingleton('customer/session')->setData('feedbackMessage', true);        
+    }
+
+}

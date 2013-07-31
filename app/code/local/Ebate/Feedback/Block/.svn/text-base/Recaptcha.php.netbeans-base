@@ -1,0 +1,14 @@
+<?php
+
+require_once('recaptcha/recaptchalib.php');
+
+class SuperDeal_Feedback_Block_Recaptcha extends Mage_Core_Block_Abstract {		
+	
+	public function _toHtml() {
+		$html = recaptcha_get_html( Mage::helper('feedback')->getPublicKey() );
+		return $html;
+	}
+	
+}
+
+?>

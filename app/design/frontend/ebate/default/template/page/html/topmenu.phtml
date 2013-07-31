@@ -31,11 +31,25 @@
  * @see Mage_Page_Block_Html_Topmenu
  */
 ?>
-<?php $_menu = $this->getHtml('level-top') ?>
-<?php if($_menu): ?>
-<div class="nav-container">
-    <ul id="nav">
-        <?php echo $_menu ?>
+
+<nav class="b-header--menu">
+    <ul class="b-header--menu-list">
+        <?php $_categories = Mage::getBlockSingleton('catalog/navigation'); ?> 
+        <?php foreach ($_categories->getStoreCategories() as $_category) : ?> 
+            <?php $category = Mage::getModel('catalog/category'); ?> 
+            <?php $category->load($_category->getId()); ?> 
+            <?php $subcategories = explode(',', $category->getChildren()); ?> 
+            <li class="b-header--menu-list__item">
+                <a class="b-header--menu-list__link" href="#"><span><?php echo $this->htmlEscape($_category->getName()); ?></span></a>
+                    <ul class="b-header--menu-list-sub">
+                        <?php foreach ($subcategories as $subcategoryId): ?> 
+                            <?php $category->load($subcategoryId); ?>
+                                <li class="b-header--menu-list-sub__item">
+                                    <a class="b-header--menu-list-sub__link" href="<? echo $category->getURL(); ?>"><? echo $category->getName(); ?></a>
+                                </li> 
+                        <?php endforeach; ?>
+                    </ul>
+            </li>
+        <?php endforeach; ?>
     </ul>
-</div>
-<?php endif ?>
+</nav>

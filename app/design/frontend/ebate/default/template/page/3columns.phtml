@@ -36,11 +36,11 @@
 </head>
 <body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
 <?php echo $this->getChildHtml('after_body_start') ?>
-<div class="wrapper">
+
     <?php echo $this->getChildHtml('global_notices') ?>
-    <div class="page">
+    
         <?php echo $this->getChildHtml('header') ?>
-        <div class="main-container col3-layout">
+<!--        <div class="main-container col3-layout">
             <div class="main">
                 <?php echo $this->getChildHtml('breadcrumbs') ?>
                 <div class="col-wrapper">
@@ -50,13 +50,292 @@
                     </div>
                     <div class="col-left sidebar"><?php echo $this->getChildHtml('left') ?></div>
                 </div>
-                <!-- <div class="col-right sidebar"><?php echo $this->getChildHtml('right') ?></div> -->
+                 <div class="col-right sidebar"><?php echo $this->getChildHtml('right') ?></div> 
             </div>
+        </div>-->
+
+        <div class="b-content">
+      <aside class="b-aside b-aside__right">
+        <img src="<?php echo $this->getSkinUrl('images/tmp/05.jpg'); ?>">
+      </aside>
+      <article class="b-article">
+        <section class="b-home--slider">
+          <div id="iview">
+            <div data-iview:thumbnail="<?php echo $this->getSkinUrl('images/slider/01.jpg'); ?>" data-iview:image="<?php echo $this->getSkinUrl('images/slider/01.jpg'); ?>" data-iview:transition="slide-in-right">
+              <div class="iview-caption b-home--slider-block-item-descr" data-x="705" data-y="0" data-speed="400" data-transition="wipeRight">
+                <h3 class="b-home--slider-block-item-descr__title">Выгодные цены на телефоны и планшеты Android</h3>
+                <p class="b-home--slider-block-item-descr__text">Более 100 моделей телефонов, планшетов и аксессуаров</p>
+              </div>
+            </div>
+
+            <div data-iview:thumbnail="<?php echo $this->getSkinUrl('images/slider/02.jpg'); ?>" data-iview:image="<?php echo $this->getSkinUrl('images/slider/02.jpg'); ?>" data-iview:transition="slide-in-right">
+              <div class="iview-caption b-home--slider-block-item-descr" data-x="705" data-y="0" data-speed="400" data-transition="wipeRight">
+                <h3 class="b-home--slider-block-item-descr__title">Выгодные цены на телефоны и планшеты Android</h3>
+                <p class="b-home--slider-block-item-descr__text">Более 100 моделей телефонов, планшетов и аксессуаров</p>
+              </div>
+            </div>
+
+            <div data-iview:thumbnail="<?php echo $this->getSkinUrl('images/slider/03.jpg'); ?>" data-iview:image="<?php echo $this->getSkinUrl('images/slider/03.jpg'); ?>" data-iview:transition="slide-in-right">
+              <div class="iview-caption b-home--slider-block-item-descr" data-x="705" data-y="0" data-speed="400" data-transition="wipeRight">
+                <h3 class="b-home--slider-block-item-descr__title">Выгодные цены на телефоны и планшеты Android</h3>
+                <p class="b-home--slider-block-item-descr__text">Более 100 моделей телефонов, планшетов и аксессуаров</p>
+              </div>
+            </div>
+
+            <div data-iview:thumbnail="<?php echo $this->getSkinUrl('images/slider/04.jpg'); ?>" data-iview:image="<?php echo $this->getSkinUrl('images/slider/04.jpg'); ?>" data-iview:transition="slide-in-right">
+              <div class="iview-caption b-home--slider-block-item-descr" data-x="705" data-y="0" data-speed="400" data-transition="wipeRight">
+                <h3 class="b-home--slider-block-item-descr__title">Выгодные цены на телефоны и планшеты Android</h3>
+                <p class="b-home--slider-block-item-descr__text">Более 100 моделей телефонов, планшетов и аксессуаров</p>
+              </div>
+            </div>
+          </div>
+
+          <!--
+          <ul class="b-home--slider-block" id="homeslider">
+            <li class="b-home--slider-block-item">
+              <img src="img/slider/01.jpg">
+              <div class="b-home--slider-block-item-descr">
+                <h3 class="b-home--slider-block-item-descr__title">Выгодные цены на телефоны и планшеты Android</h3>
+                <p class="b-home--slider-block-item-descr__text">Более 100 моделей телефонов, планшетов и аксессуаров</p>
+              </div>
+            </li>
+            <li class="b-home--slider-block-item">
+
+                <img src="img/slider/02.jpg">
+
+              <div class="b-home--slider-block-item-descr">
+                <h3 class="b-home--slider-block-item-descr__title">Выгодные цены на телефоны и планшеты Android</h3>
+                <p class="b-home--slider-block-item-descr__text">Более 100 моделей телефонов, планшетов и аксессуаров</p>
+              </div>
+            </li>
+            <li class="b-home--slider-block-item">
+
+                <img src="img/slider/03.jpg">
+
+              <div class="b-home--slider-block-item-descr">
+                <h3 class="b-home--slider-block-item-descr__title">Выгодные цены на телефоны и планшеты Android</h3>
+                <p class="b-home--slider-block-item-descr__text">Более 100 моделей телефонов, планшетов и аксессуаров</p>
+              </div>
+            </li>
+            <li class="b-home--slider-block-item">
+
+                <img src="img/slider/04.jpg">
+
+              <div class="b-home--slider-block-item-descr">
+                <h3 class="b-home--slider-block-item-descr__title">Выгодные цены на телефоны и планшеты Android</h3>
+                <p class="b-home--slider-block-item-descr__text">Более 100 моделей телефонов, планшетов и аксессуаров</p>
+              </div>
+            </li>
+            <li class="b-home--slider-block-item">
+
+                <img src="img/slider/05.jpg">
+              <div class="b-home--slider-block-item-descr">
+                <h3 class="b-home--slider-block-item-descr__title">Выгодные цены на телефоны и планшеты Android</h3>
+                <p class="b-home--slider-block-item-descr__text">Более 100 моделей телефонов, планшетов и аксессуаров</p>
+              </div>
+            </li>
+          </ul>
+          -->
+        </section>
+
+        <section class="b-home--offers">
+          <h2 class="b-page__title">Предложения от магазинов</h2>
+          <ul class="b-home--offers-list">
+            <li class="b-home--offers-list-item">
+              <figure class="b-home--offers-list-item-shop">
+                <a class="b-home--offers-list-item-shop__img" href="#">
+                  <img src="<?php echo $this->getSkinUrl('images/tmp/02.jpg'); ?>" alt="">
+                </a>
+                <div class="b-home--offers-list-item-shop__refund">5% возврата</div>
+                <a class="b-button" href="#">Купить</a>
+              </figure>
+              <figure class="b-home--offers-list-item-product">
+                <a class="b-home--offers-list-item-product__img" href="#">
+                  <img src="<?php echo $this->getSkinUrl('images/tmp/01.jpg'); ?>" alt="">
+                </a>
+                The Shopping Channel Canada offers all of your favorite TV shopping top name brands. Find discount prices and
+                <a class="b-home--offers-list-item-product__link" href="#">...more</a>
+              </figure>
+            </li>
+            <li class="b-home--offers-list-item">
+              <figure class="b-home--offers-list-item-shop">
+                <a class="b-home--offers-list-item-shop__img" href="#">
+                  <img src="<?php echo $this->getSkinUrl('images/tmp/02.jpg'); ?>" alt="">
+                </a>
+                <div class="b-home--offers-list-item-shop__refund">5% возврата</div>
+                <a class="b-button" href="#">Купить</a>
+              </figure>
+              <figure class="b-home--offers-list-item-product">
+                <a class="b-home--offers-list-item-product__img" href="#">
+                  <img src="<?php echo $this->getSkinUrl('images/tmp/01.jpg'); ?>" alt="">
+                </a>
+                The Shopping Channel Canada offers all of your favorite TV shopping top name brands. Find discount prices and
+                <a class="b-home--offers-list-item-product__link" href="#">...more</a>
+              </figure>
+            </li>
+          </ul>
+          <ul class="b-home--offers-list">
+            <li class="b-home--offers-list-item">
+              <figure class="b-home--offers-list-item-shop">
+                <a class="b-home--offers-list-item-shop__img" href="#">
+                  <img src="<?php echo $this->getSkinUrl('images/tmp/02.jpg'); ?>" alt="">
+                </a>
+                <div class="b-home--offers-list-item-shop__refund">5% возврата</div>
+                <a class="b-button" href="#">Купить</a>
+              </figure>
+              <figure class="b-home--offers-list-item-product">
+                <a class="b-home--offers-list-item-product__img" href="#">
+                  <img src="<?php echo $this->getSkinUrl('images/tmp/01.jpg'); ?>" alt="">
+                </a>
+                The Shopping Channel Canada offers all of your favorite TV shopping top name brands. Find discount prices and
+                <a class="b-home--offers-list-item-product__link" href="#">...more</a>
+              </figure>
+            </li>
+            <li class="b-home--offers-list-item">
+              <figure class="b-home--offers-list-item-shop">
+                <a class="b-home--offers-list-item-shop__img" href="#">
+                  <img src="<?php echo $this->getSkinUrl('images/tmp/02.jpg'); ?>" alt="">
+                </a>
+                <div class="b-home--offers-list-item-shop__refund">5% возврата</div>
+                <a class="b-button" href="#">Купить</a>
+              </figure>
+              <figure class="b-home--offers-list-item-product">
+                <a class="b-home--offers-list-item-product__img" href="#">
+                  <img src="<?php echo $this->getSkinUrl('images/tmp/01.jpg'); ?>" alt="">
+                </a>
+                The Shopping Channel Canada offers all of your favorite TV shopping top name brands. Find discount prices and
+                <a class="b-home--offers-list-item-product__link" href="#">...more</a>
+              </figure>
+            </li>
+          </ul>
+        </section>
+
+        <div class="b-home--banner">
+          <img src="<?php echo $this->getSkinUrl('images/tmp/03.jpg'); ?>" alt="">
         </div>
+
+        <section class="b-home--best">
+          <h2 class="b-page__title">Лучшие предложения дня</h2>
+          <ul class="b-product--list">
+            <li class="b-product--list-item">
+              <a class="b-product--list-item__company" href="#">ZAKAZ.UA</a>
+              <a class="b-product--list-item__img" href="#">
+                <img src="<?php echo $this->getSkinUrl('images/product-list-empty.png'); ?>" alt="">
+              </a>
+              <div class="b-product--list-item__price">
+                Цена 100 грн.<br>
+                <span class="b-product--list-item__refund">Возврат 10%</span>
+              </div>
+              <a class="b-button" href="#">Купить</a>
+            </li>
+
+            <li class="b-product--list-item">
+              <a class="b-product--list-item__company" href="#">ZAKAZ.UA</a>
+              <a class="b-product--list-item__img" href="#">
+                <img src="<?php echo $this->getSkinUrl('images/product-list-empty.png'); ?>" alt="">
+              </a>
+              <div class="b-product--list-item__price">
+                Цена 100 грн.<br>
+                <span class="b-product--list-item__refund">Возврат 10%</span>
+              </div>
+              <a class="b-button" href="#">Купить</a>
+            </li>
+            <li class="b-product--list-item">
+              <a class="b-product--list-item__company" href="#">ZAKAZ.UA</a>
+              <a class="b-product--list-item__img" href="#">
+                <img src="<?php echo $this->getSkinUrl('images/product-list-empty.png'); ?>" alt="">
+              </a>
+              <div class="b-product--list-item__price">
+                Цена 100 грн.<br>
+                <span class="b-product--list-item__refund">Возврат 10%</span>
+              </div>
+              <a class="b-button" href="#">Купить</a>
+            </li>
+            <li class="b-product--list-item">
+              <a class="b-product--list-item__company" href="#">ZAKAZ.UA</a>
+              <a class="b-product--list-item__img" href="#">
+                <img src="<?php echo $this->getSkinUrl('images/product-list-empty.png'); ?>" alt="">
+              </a>
+              <div class="b-product--list-item__price">
+                Цена 100 грн.<br>
+                <span class="b-product--list-item__refund">Возврат 10%</span>
+              </div>
+              <a class="b-button" href="#">Купить</a>
+            </li>
+            <li class="b-product--list-item">
+              <a class="b-product--list-item__company" href="#">ZAKAZ.UA</a>
+              <a class="b-product--list-item__img" href="#">
+                <img src="<?php echo $this->getSkinUrl('images/product-list-empty.png'); ?>" alt="">
+              </a>
+              <div class="b-product--list-item__price">
+                Цена 100 грн.<br>
+                <span class="b-product--list-item__refund">Возврат 10%</span>
+              </div>
+              <a class="b-button" href="#">Купить</a>
+            </li>
+            <li class="b-product--list-item">
+              <a class="b-product--list-item__company" href="#">ZAKAZ.UA</a>
+              <a class="b-product--list-item__img" href="#">
+                <img src="<?php echo $this->getSkinUrl('images/product-list-empty.png'); ?>" alt="">
+              </a>
+              <div class="b-product--list-item__price">
+                Цена 100 грн.<br>
+                <span class="b-product--list-item__refund">Возврат 10%</span>
+              </div>
+              <a class="b-button" href="#">Купить</a>
+            </li>
+            <li class="b-product--list-item">
+              <a class="b-product--list-item__company" href="#">ZAKAZ.UA</a>
+              <a class="b-product--list-item__img" href="#">
+                <img src="<?php echo $this->getSkinUrl('images/product-list-empty.png'); ?>" alt="">
+              </a>
+              <div class="b-product--list-item__price">
+                Цена 100 грн.<br>
+                <span class="b-product--list-item__refund">Возврат 10%</span>
+              </div>
+              <a class="b-button" href="#">Купить</a>
+            </li>
+            <li class="b-product--list-item">
+              <a class="b-product--list-item__company" href="#">ZAKAZ.UA</a>
+              <a class="b-product--list-item__img" href="#">
+                <img src="<?php echo $this->getSkinUrl('images/product-list-empty.png'); ?>" alt="">
+              </a>
+              <div class="b-product--list-item__price">
+                Цена 100 грн.<br>
+                <span class="b-product--list-item__refund">Возврат 10%</span>
+              </div>
+              <a class="b-button" href="#">Купить</a>
+            </li>
+            <li class="b-product--list-item">
+              <a class="b-product--list-item__company" href="#">ZAKAZ.UA</a>
+              <a class="b-product--list-item__img" href="#">
+                <img src="<?php echo $this->getSkinUrl('images/product-list-empty.png'); ?>" alt="">
+              </a>
+              <div class="b-product--list-item__price">
+                Цена 100 грн.<br>
+                <span class="b-product--list-item__refund">Возврат 10%</span>
+              </div>
+              <a class="b-button" href="#">Купить</a>
+            </li>
+            <li class="b-product--list-item">
+              <a class="b-product--list-item__company" href="#">ZAKAZ.UA</a>
+              <a class="b-product--list-item__img" href="#">
+                <img src="<?php echo $this->getSkinUrl('images/product-list-empty.png'); ?>" alt="">
+              </a>
+              <div class="b-product--list-item__price">
+                Цена 100 грн.<br>
+                <span class="b-product--list-item__refund">Возврат 10%</span>
+              </div>
+              <a class="b-button" href="#">Купить</a>
+            </li>
+          </ul>
+        </section>
+      </article>
+    </div>
+
         <?php echo $this->getChildHtml('footer') ?>
         <?php echo $this->getChildHtml('before_body_end') ?>
-    </div>
-</div>
+
 <?php echo $this->getAbsoluteFooter() ?>
 </body>
 </html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>   
+    <modules>
+        <Ebate_Feedback>
+            <version>0.1.0</version>
+        </Ebate_Feedback>
+    </modules>
+
+    <global>
+	<models>
+	    <feedback>
+    		<class>Ebate_Feedback_Model</class>
+	    </feedback>
+	</models>
+        
+        <blocks>
+	    <feedback>
+		  <class>Ebate_Feedback_Block</class>
+	    </feedback>
+	</blocks>
+        <helpers>
+	    <feedback>
+		<class>Ebate_Feedback_Helper</class>
+	    </feedback>
+	</helpers>
+    </global>
+
+    <frontend>
+        <layout>
+            <updates>
+                <feedback>
+                    <file>feedback.xml</file>
+                </feedback>
+            </updates>
+        </layout>
+        <routers>
+            <feedback>
+                <use>standard</use>
+                <args>
+                    <module>Ebate_Feedback</module>
+                    <frontName>feedback</frontName>
+                </args>
+            </feedback>
+        </routers>       
+    </frontend>
+</config>

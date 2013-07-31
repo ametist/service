@@ -27,7 +27,7 @@
  * @var Mage_Page_Block_Html_Header $this
  */
 ?>
-<div class="header-container">
+<!--<div class="header-container">
     <div class="header">
         <?php if ($this->getIsHomePage()):?>
         <h1 class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
@@ -42,5 +42,34 @@
         </div>
         <?php echo $this->getChildHtml('topContainer'); ?>
     </div>
-</div>
-<?php echo $this->getChildHtml('topMenu') ?>
+</div>-->
+
+
+
+
+
+  <div class="b-wrapper">
+    <!-- Шапка -->
+    <header class="b-header">
+        <div class="b-header-inner">
+        <nav class="b-header--buttons">
+          <a class="b-header--buttons__item b-header--buttons__item_login" href="#">Вход</a>
+          |
+          <a class="b-header--buttons__item b-header--buttons__item_mycach" href="#">Мой кеш</a>
+        </nav>
+        <a class="b-header-logo" href="/"><img src="<?php echo $this->getSkinUrl('images/logo.png'); ?>" alt="MyCash"></a>
+        <div class="b-header--search">
+          <form action="" method="" name="" id="">
+            <input class="b-header--search__input" id="header-search-input" type="text" name="" value="Поиск"><!--
+            --><input class="b-header--search__submit" type="submit" name="" value="Искать">
+          </form>
+        </div>
+      </div>
+
+      <!-- Верхнее меню -->
+        <?php echo $this->getChildHtml('topMenu') ?>
+      <!-- /Верхнее меню -->
+    </header>
+    <!-- /Шапка -->
+    
+    <div class="b-content">

@@ -1,0 +1,75 @@
+<?php
+
+require_once('recaptcha/recaptchalib.php');
+
+ class SuperDeal_Feedback_Helper_Data extends Mage_Core_Helper_Abstract 
+{
+     
+     	const CAPTCHA_PUBLIC_KEY = "6LeCotMSAAAAADzI61Y8PeGpa7fN2p1U_qPGRcON ";
+	const CAPTCHA_PRIVATE_KEY = "6LeCotMSAAAAAGrhoT921h44BXtUH7zfRikGq77E ";
+        
+        const CRYPT_SECRET_KEY = '6LeCotMSAAAAADzI61';
+        const CRYPT_SECRET_IV  = '63548745';
+	
+	public function captchaIsValid(Mage_Core_Controller_Request_Http $request) 
+        {
+            
+		if ($request) {
+			$resp = recaptcha_check_answer (self::CAPTCHA_PRIVATE_KEY,
+		                           $_SERVER["REMOTE_ADDR"],
+		                           $request->getParam("recaptcha_challenge_field"),
+		                           $request->getParam("recaptcha_response_field") );		
+			return $resp->is_valid;
+		} 
+		return false;						
+	}
+	
+	public function captchaGetError(Mage_Core_Controller_Request_Http $request) 
+        {
+            
+            if ($request) {
+                    $resp = recaptcha_check_answer (self::CAPTCHA_PRIVATE_KEY,
+                                                $_SERVER["REMOTE_ADDR"],
+                                                $request->getParam("recaptcha_challenge_field"),
+                                                $request->getParam("recaptcha_response_field") );
+                    return $resp->error;
+            }
+            return false;
+		
+	}
+	
+	public function getPublicKey() { return  SuperDeal_Feedback_Helper_Data::CAPTCHA_PUBLIC_KEY; }
+        
+        
+        public function cryptProductId($productId = null)
+        {
+            $cipher = mcrypt_module_open(MCRYPT_BLOWFISH, '', 'cbc', '');
+
+            mcrypt_generic_init($cipher, self::CRYPT_SECRET_KEY, self::CRYPT_SECRET_IV);
+            $encrypted = mcrypt_generic($cipher, $productId);
+            mcrypt_generic_deinit($cipher);
+            
+            return strtr(base64_encode($encrypted), '+/', '-_');
+        }
+        
+        public function decryptProductId($productId = null)
+        {
+            $productId = base64_decode(strtr($productId, '-_', '+/'));
+            $cipher = mcrypt_module_open(MCRYPT_BLOWFISH, '', 'cbc', '');
+                
+            mcrypt_generic_init($cipher, self::CRYPT_SECRET_KEY, self::CRYPT_SECRET_IV);
+            $decrypted = mdecrypt_generic($cipher, $productId);
+            mcrypt_generic_deinit($cipher);
+            
+            return $decrypted;
+        }
+        
+        public function getProductRegRedirect($productHash = null, $city = null)
+        {
+            $productId = $this->decryptProductId($productHash);
+            $product = Mage::getModel('catalog/product')->load($productId);
+            
+            return Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB) . $city . '/' . $product->getUrlPath();
+        }
+ }
+?>

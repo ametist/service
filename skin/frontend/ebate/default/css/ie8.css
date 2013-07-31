@@ -1,0 +1,7 @@
+.b-form__label b {
+  display: none;
+}
+
+.b-form__checkbox {
+  visibility: visible;
+}

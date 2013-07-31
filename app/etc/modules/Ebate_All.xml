@@ -3,7 +3,7 @@
 <config>
     <modules>
         <Ebate_Affiliate>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
         </Ebate_Affiliate>
         <Ebate_Rewardpay>
@@ -26,8 +26,12 @@
             <codePool>local</codePool>
         </Ebate_Parser>
         <Ebate_Mailersoft>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
         </Ebate_Mailersoft>
+        <Ebate_Feedback>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Ebate_Feedback>
     </modules>
 </config>

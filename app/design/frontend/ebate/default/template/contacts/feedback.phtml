@@ -1,0 +1,67 @@
+<form action="<?php echo Mage::getUrl('feedback/index/index'); ?>" id="contactForm" method="POST">
+    <div class="fieldset">
+        <h2 class="legend"><?php echo Mage::helper('contacts')->__('Форма обратной связи    ') ?></h2>
+         
+           <?php if(Mage::getSingleton('customer/session')->getData('feedbackMessage')): ?>
+           <ul class="messages"><li class="success-msg"><ul><li><span>Спасибо, Ваш вопрос будет рассмотрен в ближайшее время!</span></li></ul></li></ul>
+           <?php Mage::getSingleton('customer/session')->setData('feedbackMessage', false); ?>
+           <?php endif; ?>
+           
+            
+        <ul class="form-list">
+            <li>
+                <label for="typeQuery" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Тема вопроса') ?></label>
+                <div class="input-box">
+                    <select name="typeQuery" id="typeQuery" class="required-entry validate-select">
+                        <option></option>
+                        <option value="1">Проблема с авторизацией на сайте</option>
+                        <option value="2">Вопросы по условиям акции</option>
+                        <option value="3">Сложности с оформлением заказа</option>
+                        <option value="4">Когда будут перечислены деньги на мой аккаунт?</option>
+                        <option value="5">Как вывести деньги со своего счета?</option>
+                    </select>
+                </div>
+            </li>
+            <li class="fields">
+                <div class="field">
+                    <label for="name" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Имя') ?></label>
+                    <div class="input-box">
+                        <?php
+                            
+                            $userName = $this->htmlEscape($this->helper('contacts')->getUserName());
+                            $userName = str_replace('lastname', '', $userName);
+                        
+                        ?>
+                        <input name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Имя') ?>" value="<?php echo $userName; ?>" class="input-text required-entry" type="text" />
+                    </div>
+                </div>
+           <li class="fields">     
+                <div class="field">
+                    <label for="email" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Контактный email') ?></label>
+                    <div class="input-box">
+                        <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Контактный email') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email" type="text" />
+                    </div>
+                </div>
+                </li>
+            </li>
+            <li class="wide">
+                <label for="comment" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Текст обращения') ?></label>
+                <div class="input-box">
+                    <textarea name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Текст обращения') ?>" class="required-entry input-text" cols="5" rows="3"></textarea>
+                </div>
+            </li>
+            <li>
+                <p class="required"><?php echo Mage::helper('contacts')->__('* Required Fields') ?></p>
+                <input type="hidden" name="hsk" value="a024cb70fb3d1ab1206ac6c85b65fe76" />
+                <input type="text" id="baspm" name="baspm" value="" style="display: none;"/>
+                <button type="submit" name="sendMessage" title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="button"><span><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></span></button>
+            </li>     
+        </ul>
+        
+    </div>  
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var contactForm = new VarienForm('contactForm', true);
+//]]>
+</script> 

@@ -1,4 +1,26 @@
-<div id="userInfo">
+<div id="redirectWindow">
+       <?php $redirectUrl = Mage::helper('free/data')->getProductByItems($this->getItems()); ?>
+    <p><?php echo $this->__('Подождите пожалуйста'); ?> <img src="<?php echo $this->getSkinUrl('images/preloader.png'); ?>" /></p>
+    <p><?php echo $this->__('Поздравляем, '), Mage::getSingleton('customer/session')->getCustomer()->getFirstname(); ?>  </p>
+    <p><?php echo $this->__('Вы будете автоматически перенаправлены на '), $redirectUrl, $this->__(' через '); ?> <span id="redirectTime">5</span> секунд </p>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+jQuery.noConflict();
+jQuery(document).ready(function(){
+    setInterval(function(){
+        var currentTime = parseInt(jQuery('#redirectTime').html());
+        if(currentTime == 0){
+            document.location.href = "<?php echo $redirectUrl; ?>";
+        } else {    
+            jQuery('#redirectTime').html(currentTime - 1);
+        }}, 1000);
+});
+//]]>    
+</script>
+
+<!--<div id="userInfo">
     <h1>Оформление заказа</h1>
     <div id="bkgSampleContent">
 
@@ -36,7 +58,7 @@
                                 <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
                                     <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><span class="nobr"><?php echo $this->__('Move to Wishlist') ?></span></th>
                                 <?php endif ?>
-<!--                                <th class="a-center" colspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Unit Price') ?></span></th>-->
+                                <th class="a-center" colspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Unit Price') ?></span></th>
                                 <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><?php echo $this->__('Qty') ?></th>
                                 <th class="a-center" colspan="<?php echo $mergedCells; ?>"><?php echo $this->__('Subtotal') ?></th>
                                 <th rowspan="<?php echo $mergedCells; ?>" class="a-center">&nbsp;</th>
@@ -81,24 +103,24 @@
                                 <ul>
                                     <li class="fields" style="display: none"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getQuote()->getCustomer())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
                                     <li class="fields">
-                                        <div class="field"><!-- 
-                                            <label for="billing:email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label> -->
+                                        <div class="field"> 
+                                            <label for="billing:email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label> 
                                             <div class="input-box">
                                                 <input type="hidden" name="billing[email]" id="billing:email" readonly="readonly" value="<?php echo $this->getQuote()->getCustomer()->getEmail() ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email required-entry" />
                                             </div>
                                         </div>
                                     </li>
                                     <li class="fields">
-                                        <div class="field"><!-- 
-                                            <label for="billing:city" class="required"><em>*</em><?php echo $this->__('City') ?></label> -->
+                                        <div class="field"> 
+                                            <label for="billing:city" class="required"><em>*</em><?php echo $this->__('City') ?></label> 
                                             <div class="input-box">
                                                 <input type="hidden" title="<?php echo $this->__('City') ?>" name="billing[city]" readonly="readonly" value="<?php echo $this->getQuote()->getCustomer()->getStore()->getGroup()->getName() ?>" class="input-text required-entry" id="billing:city" />
                                             </div>
                                         </div>
                                     </li>
                                     <li class="fields">
-                                        <div class="field"><!-- 
-                                            <label for="billing:telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label> -->
+                                        <div class="field"> 
+                                            <label for="billing:telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label> 
                                             <div class="input-box">
                                                 <input type="hidden" name="billing[telephone]" value="<?php print_r($this->getQuote()->getCustomer()->getData('phone')) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" id="billing:telephone" />
                                             </div>
@@ -124,7 +146,7 @@
         </form>
     </div>
 </div>
-<!-- HTTP Google Code for Buyers Remarketing List -->
+ HTTP Google Code for Buyers Remarketing List 
 <script type="text/javascript">
 //<![CDATA[
 jQuery.noConflict();
@@ -161,10 +183,10 @@ jQuery(function(){
 });
 //]]>    
 </script>
-<!--<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
-</script>-->
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
 <noscript>
 <div style="display:inline;">
-<!--    <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/978162788/?label=VFIXCLTQrAIQ5Ki20gM&amp;guid=ON&amp;script=0"/>-->
+    <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/978162788/?label=VFIXCLTQrAIQ5Ki20gM&amp;guid=ON&amp;script=0"/>
 </div>
-</noscript>
+</noscript>-->

@@ -1,0 +1,38 @@
+<?php
+
+class SuperDeal_Feedback_IndexController extends Mage_Core_Controller_Front_Action
+{
+    
+    public function indexAction()
+    {
+        $data = $this->getRequest()->getParams();
+        
+        if(isset($data['sendMessage']))
+        {
+            
+            if(isset($data['hsk']) AND $data['hsk'] == "a024cb70fb3d1ab1206ac6c85b65fe76" AND isset($data['baspm']) AND $data['baspm'] == "")
+            {
+                $request = $this->getRequest();
+                Mage::getModel('feedback/feedback')->sendLetter($data);
+            }
+            
+            $this->_redirect('contact');
+        }
+        
+    }
+    
+    public function createPostAction() 
+    {
+        
+        $request = $this->getRequest();		
+        $captchaIsValid =  Mage::helper('feedback')->captchaIsValid($request);
+
+        if ($captchaIsValid) {
+                parent::createPostAction();
+        } else {
+                $this->_getSession()->setCustomerFormData($this->getRequest()->getPost());
+                $this->_getSession()->addError($this->__('Verification code was not correct. Please try again.'));
+                $this->_redirectError(Mage::getUrl('*/*/create', array('_secure'=>true)));
+        }
+    }
+} 

@@ -1,0 +1,729 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address,
+big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sup, sub, tt, var, b, u, i, center,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside,
+canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time,
+mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+*:focus {
+  outline: none;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  min-width: 780px;
+  background: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #7e7e7e;
+}
+
+a {
+  text-decoration: none;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.b-button {
+  display: inline-block;
+  padding: 6px 20px;
+  border: solid 1px #c1d2a6;
+  border-radius: 10px;
+  background-color: #789e3e;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  overflow: visible;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+input.b-button {
+  padding: 5px 17px 6px;
+}
+
+.b-button:hover {
+  background-color: #67883a;
+  text-decoration: none;
+  color: #fff;
+}
+
+.b-right {
+  text-align: right !important;
+}
+
+.b-float__right {
+  float: right;
+}
+
+.b-form {
+  margin: 0 0 15px;
+  max-width: 450px;
+}
+  .b-form__text {
+    margin: 0 0 10px;
+  }
+
+  .b-form-table {
+    display: table;
+    width: 100%;
+  }
+    .b-form-table-row {
+      display: table-row;
+    }
+      .b-form-table__title {
+        display: table-cell;
+        vertical-align: top;
+        padding: 7px 15px 5px 0;
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      .b-form-table__data {
+        display: table-cell;
+        vertical-align: top;
+        width: 99%;
+        padding: 3px 0 10px;
+      }
+
+  .b-form__input {
+    color: #333;
+    width: 100%;
+    padding: 2px 5px;
+    border: solid 1px #c0c0c0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .b-form__label {
+    position: relative;
+    display: inline-block;
+    min-height: 16px;
+    padding: 0 0 0 22px;
+    font-style: italic;
+    cursor: pointer;
+    overflow: hidden;
+  }
+    .b-form__label b {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 2;
+      display: block;
+      width: 14px;
+      height: 14px;
+      border: solid 1px #c0c0c0;
+      background: transparent url("/service/skin/frontend/ebate/default/images/checkbox-bg.png") no-repeat center -100px;
+    }
+    .b-form__label > .b-form__checkbox:checked + b {
+      background-position: center center;
+    }
+
+    .b-form__checkbox {
+      position: absolute;
+      margin: 0;
+      left: 0;
+      top: 0;
+      top: -2px;
+      vertical-align: baseline;
+      visibility: hidden;
+    }
+
+  .b-form__requred {
+    color: #f68d1e;
+  }
+
+  .b-form__requredtext {
+    font-size: 11px;
+    font-style: italic;
+    color: #f68d1e;
+  }
+
+  .b-form__forgot {
+    display: inline-block;
+    margin: 0 15px 0 0;
+    padding: 8px 0 0;
+    font-weight: bold;
+    font-style: italic;
+    color: #5f7e38;
+  }
+  .b-form__forgot:hover {
+    color: #5f7e38;
+  }
+
+
+.b-wrapper {
+  min-height: 100%;
+  margin: 0 auto;
+}
+.b-wrapper:after {
+  content: '';
+  display: block;
+  height: 85px;
+}
+  .b-header {
+
+  }
+    .b-header-inner {
+      position: relative;
+      max-width: 1280px;
+      height: 105px;
+      margin: 0 auto;
+    }
+      .b-header-logo {
+        float: left;
+        display: inline-block;
+        padding: 15px 0 0;
+        margin: 0 0 0 20px;
+      }
+
+      .b-header--buttons {
+        float: right;
+        margin: 0 20px 5px 0;
+        padding: 25px 0 0;
+        text-align: right;
+        font-size: 13px;
+        color: #757575;
+      }
+        .b-header--buttons__item {
+          display: inline-block;
+          vertical-align: baseline;
+          padding: 25px 0 0;
+          font-style: italic;
+          color: #757575;
+        }
+        .b-header--buttons__item_login {
+          background: transparent url("/service/skin/frontend/ebate/default/images/icon-login.png") no-repeat right top;
+          margin-right: 5px;
+        }
+        .b-header--buttons__item_mycach {
+          background: transparent url("/service/skin/frontend/ebate/default/images/icon-mycash.png") no-repeat left top;
+          margin-left: 5px;
+        }
+
+      .b-header--search {
+        padding: 37px 0 0;
+        text-align: center;
+      }
+        .b-header--search__input {
+          position: relative;
+          z-index: 2;
+          display: inline-block;
+          vertical-align: top;
+          width: 240px;
+          height: 24px;
+          margin: 0 -13px 0 0;
+          line-height: 22px;
+          padding: 0 8px;
+          border: solid 2px #e6e6e6;
+          border-radius: 8px;
+          background-color: #fff;
+          font-family: Tahoma, Arial, sans-serif;
+          font-size: 15px;
+          color: #7e7e7e;
+        }
+        .b-header--search__submit,
+        .b-header--search__submit:active {
+          display: inline-block;
+          vertical-align: top;
+          height: 28px;
+          padding-left: 23px;
+          padding-right: 10px;
+          border: none;
+          border-radius: 8px;
+          background-color: #789e3e;
+          text-align: center;
+          font-size: 15px;
+          color: #fff;
+          cursor: pointer;
+        }
+
+    .b-header--menu {
+      background-color: #789e3f;
+    }
+      .b-header--menu-list {
+        max-width: 1280px;
+        margin: 0 auto;
+        text-align: center;
+      }
+        .b-header--menu-list__item {
+          position: relative;
+          display: inline-block;
+          vertical-align: top;
+          margin: 0 0 0 -1px;
+        }
+        .b-header--menu-list__item:hover,
+        .b-header--menu-list__item_active {
+          background-color: #67883a;
+        }
+          .b-header--menu-list__link,
+          .b-header--menu-list__link:hover {
+            display: block;
+            padding: 17px 0;
+            line-height: 1em;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+          }
+            .b-header--menu-list__link > span {
+              display: block;
+              padding: 0 30px;
+              border-right: solid 1px #67883a;
+            }
+            .b-header--menu-list__item:last-child .b-header--menu-list__link > span {
+              border-right: none;
+            }
+
+          .b-header--menu-list-sub {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 5;
+            max-height: 0;
+            background-color: #789e3f;
+            border-radius: 0 0 7px 7px;
+            overflow: hidden;
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+          }
+          .b-header--menu-list__item:hover .b-header--menu-list-sub {
+            max-height: 300px;
+            background-color: #67883a;
+          }
+            .b-header--menu-list-sub__item {
+              display: block;
+            }
+              .b-header--menu-list-sub__link {
+                display: block;
+                padding: 7px 20px;
+                white-space: nowrap;
+                font-size: 14px;
+                font-weight: bold;
+                color: #fff;
+              }
+              .b-header--menu-list-sub__link:hover {
+                background: #4e6d24;
+                text-decoration: none;
+                color: #fff;
+              }
+
+  .b-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 15px 20px 0;
+  }
+    .b-aside {
+      float: left;
+      margin: 0 20px 15px 0;
+    }
+    .b-aside__right {
+      float: right;
+      width: 250px;
+      margin: 0 0 15px 20px;
+    }
+      .b-aside--goods {
+        min-width: 165px;
+        white-space: nowrap;
+      }
+        .b-aside--goods__title {
+          margin: 0;
+          padding: 8px 15px;
+          border-radius: 10px 10px 0 0;
+          background-color: #789e3e;
+          font-size: 14px;
+          font-weight: bold;
+          color: #fff;
+        }
+        .b-aside--goods__item {
+          display: block;
+          padding: 8px 15px;
+          background-color: #dbdbdb;
+          color: #8a8a8a;
+        }
+        .b-aside--goods_green .b-aside--goods__item {
+          background-color: #e2f1cd;
+        }
+        .b-aside--goods__item:hover,
+        .b-aside--goods__item_active {
+          background-color: #8a8a8a;
+          color: #dbdbdb;
+          text-decoration: none;
+        }
+        .b-aside--goods_green .b-aside--goods__item:hover,
+        .b-aside--goods_green .b-aside--goods__item_active {
+          background-color: #87b147;
+          color: #fff;
+        }
+        .b-aside--goods__item:last-child {
+          border-radius: 0 0 10px 10px;
+        }
+
+    .b-article {
+      overflow: hidden;
+    }
+      .b-page__title {
+        margin: 0 0 15px;
+        font-size: 18px;
+        font-weight: normal;
+        font-style: italic;
+        color: #f68d1e;
+      }
+
+      .b-page-block__title {
+        margin: 0 0 15px;
+        font-size: 16px;
+        font-weight: normal;
+        font-style: italic;
+        color: #000;
+      }
+
+      .b-home--slider {
+        display: block;
+        margin: 0 auto 15px;
+      }
+          .b-home--slider-block-item-descr__title {
+            margin: 0;
+            padding: 0;
+            font-size: 22px;
+            font-weight: bold;
+          }
+
+          .b-home--slider-block-item-descr__text {
+            position: absolute;
+            left: 0;
+            bottom: 30px;
+            width: 100%;
+            font-size: 14px;
+          }
+
+      .b-home--offers {
+        margin: 0 0 15px;
+      }
+        .b-home--offers-list {
+          position: relative;
+          margin: -1px 0 0;
+          border: solid 1px #9d9d9d;
+          list-style-type: none;
+          overflow: hidden;
+        }
+        .b-home--offers-list:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 1px;
+          height: 100%;
+          background-color: #9d9d9d;
+        }
+          .b-home--offers-list-item {
+            float: left;
+            width: 50%;
+            padding: 20px 40px;
+            overflow: hidden;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+          }
+            .b-home--offers-list-item-product {
+              overflow: hidden;
+              font-style: italic;
+            }
+              .b-home--offers-list-item-product__img,
+              .b-home--offers-list-item-shop__img {
+                display: block;
+                height: 75px;
+                line-height: 72px;
+                text-align: center;
+              }
+                .b-home--offers-list-item-product__img img,
+                .b-home--offers-list-item-shop__img img {
+                  max-height: 99%;
+                  max-width: 99%;
+                  vertical-align: middle;
+                }
+
+              .b-home--offers-list-item-product__link {
+                color: #f78e1f;
+              }
+              .b-home--offers-list-item-product__link:hover {
+                color: #779d3e;
+                text-decoration: none;
+              }
+
+            .b-home--offers-list-item-shop {
+              float: right;
+              width: 120px;
+              margin: 0 0 0 40px;
+              text-align: center;
+            }
+              .b-home--offers-list-item-shop__refund {
+                margin: 15px 0;
+                font-weight: bold;
+                color: #f78e1f;
+              }
+
+      .b-home--banner {
+        margin: 0 0 15px;
+        text-align: center;
+      }
+
+      .b-product--list {
+
+      }
+        .b-product--list-item {
+          display: inline-block;
+          vertical-align: top;
+          width: 160px;
+          height: 280px;
+          margin: 0 25px 20px 0;
+          text-align: center;
+        }
+          .b-product--list-item__company,
+          .b-product--list-item__company:hover {
+            display: block;
+            margin: 0 0 10px;
+            padding: 8px 0;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            background-color: #e2f1cd;
+            font-size: 14px;
+            font-weight: bold;
+            color: #789e3f;
+          }
+
+          .b-product--list-item__img {
+            display: block;
+            height: 150px;
+            line-height: 148px;
+            margin: 0 0 10px;
+            text-align: center;
+          }
+            .b-product--list-item__img  img {
+              max-height: 99%;
+              max-width: 99%;
+              vertical-align: middle;
+            }
+
+          .b-product--list-item__price {
+            margin: 0 0 7px;
+            line-height: 1.4em;
+            text-transform: uppercase;
+            color: #000;
+          }
+            .b-product--list-item__refund {
+              color: #f78e1f;
+            }
+
+      .b-help--contacts {
+        overflow: hidden;
+        margin: 0 0 15px;
+      }
+        .b-help--contacts__title {
+          margin: 0 0 50px;
+          text-align: center;
+          font-size: 18px;
+          font-weight: normal;
+          font-style: italic;
+          color: #f68d1e;
+        }
+        .b-help--contacts-links {
+          text-align: center;
+        }
+          .b-help--contacts-links__item {
+            display: inline-block;
+            vertical-align: top;
+            min-width: 66px;
+            margin: 0 50px;
+            color: #000;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            cursor: pointer;
+          }
+          .b-help--contacts-links__item:hover {
+            color: #000;
+          }
+          .b-help--contacts-links__item_email {
+            height: 60px;
+            background-image: url("/service/skin/frontend/ebate/default/images/icon-help-mail.png");
+          }
+          .b-help--contacts-links__item_chat {
+            height: 71px;
+            background-image: url("/service/skin/frontend/ebate/default/images/icon-help-chat.png");
+          }
+
+      .b-help--steps {
+        display: table;
+        width: 100%;
+        margin: 5px 0 15px;
+      }
+        .b-help--steps-item {
+          display: table-cell;
+          width: 25%;
+          padding: 0 20px;
+          vertical-align: top;
+          border-right: solid 1px #dedede;
+        }
+        .b-help--steps-item:last-child {
+          border-right: none;
+        }
+          .b-help--steps-item__number {
+            position: relative;
+            top: -3px;
+            width: 25px;
+            height: 25px;
+            line-height: 23px;
+            margin: 0 auto 10px auto;
+            background-color: #e99137;
+            border-radius: 49%;
+            text-align: center;
+            color: #fff;
+          }
+          .b-help--steps-item__title {
+            margin: 0 0 10px;
+            font-size: 14px;
+            font-weight: bold;
+            font-style: italic;
+            color: #000;
+          }
+          .b-help--steps-item__img {
+            margin: 0 0 10px;
+            text-align: center;
+          }
+            .b-help--steps-item__img img {
+              max-width: 99%;
+            }
+
+          .b-help--steps-item__text {
+            margin: 0 0 10px;
+            font-size: 11px;
+            color: #000;
+          }
+
+      .b-help--questions {
+        clear: both;
+      }
+        .b-help--questions__title {
+          margin: 0 0 10px;
+          font-size: 16px;
+          font-weight: normal;
+          font-style: italic;
+          color: #000;
+        }
+
+        .b-help--questions-list {
+
+        }
+          .b-help--questions-list-item {
+            display: block;
+            margin: 0 0 10px;
+          }
+            .b-help--questions-list-item__question {
+              margin: 0 0 3px;
+              font-size: 14px;
+              font-weight: normal;
+              font-style: italic;
+              color: #f68d1e;
+            }
+
+            .b-help--questions-list-item__answer {
+              padding: 0 0 0 15px;
+            }
+
+      .b-customer--new {
+        display: inline-block;
+        vertical-align: top;
+        width: 45%;
+        margin: 0 9.5% 0 0;
+      }
+        .b-customer--new__text {
+          min-height: 116px;
+          margin: 0 0 10px;
+        }
+
+      .b-customer--login {
+        display: inline-block;
+        vertical-align: top;
+        width: 45%;
+      }
+
+      .b-profile {
+        margin: 0 0 15px;
+        overflow: hidden;
+      }
+        .b-profile-column {
+          float: left;
+          width: 40%;
+          margin: 0 9.5% 0 0;
+        }
+
+        .b-profile-item__link {
+          font-size: 12px;
+          color: #5f7e38;
+        }
+
+        .b-profile-item {
+          margin: 0 0 8px;
+          color: #000;
+        }
+          .b-profile-item__link {
+            font-style: italic;
+            color: #5f7e38;
+          }
+
+.b-footer {
+  height: 70px;
+  margin: -70px 0 0;
+  background-color: #789e3f;
+}
+  .b-footer--menu {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 0 0;
+    line-height: 1em;
+    text-align: center;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+  }
+    .b-footer--menu__item {
+      color: #fff;
+    }
+    .b-footer--menu__item:hover {
+      text-decoration: none;
+      color: #444;
+    }
+
+@media all and (min-width: 0px) and (max-width: 990px) {
+  .b-home--offers-list-item {
+    padding: 20px 15px;
+  }
+
+  .b-home--offers-list-item-shop {
+    width: 100px;
+    margin: 0 0 0 15px;
+  }
+}
