@@ -1,5 +1,5 @@
 <?php
-/**
+/** test stash
  * Magento
  *
  * NOTICE OF LICENSE
